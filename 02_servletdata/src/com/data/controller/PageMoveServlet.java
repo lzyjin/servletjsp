@@ -23,7 +23,7 @@ public class PageMoveServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 특정 데이터를 HttpServletRequest 객체에 보관하고 HttpServletResponse객체는 데이터를 보관할 수 있다 
+		// 특정 데이터를 HttpServletRequest 객체에 보관 
 		// 응답기능을 하는 서블릿을 호출하여 응답처리하는 로직을 구현한다
 		
 		// 서버 내에서 다른 서블릿의 메소드를 실행시키는 방법 
@@ -50,6 +50,9 @@ public class PageMoveServlet extends HttpServlet {
 		
 		
 		
+		
+		
+		
 		// 페이지를 다른 서블릿으로 전환하자
 		// 다른 서블릿을 호출해보자
 		
@@ -60,8 +63,12 @@ public class PageMoveServlet extends HttpServlet {
  		// RequestDispatcher.forword(request, response)
 		
 		RequestDispatcher rd = request.getRequestDispatcher("testperson.do");
+		
 		rd.forward(request, response); // 지정된 서블릿을 호출해서 실행한다
-		// 결국 응답은 testperson.do가 함
+		
+		// forward()의 매개변수가 TestPersonServlet의 doGet()메소드의 인자로 들어가서 메소드가 실행되는것 
+		
+		// 결국 응답은 testperson.do가 함 -> TestPersonServlet 이 실행된다 
 		
 		// 클라이언트가 최초로 요청한 주소는 변경이 안된다 ( url주소창의 주소는 변하지 않는다 )
 		

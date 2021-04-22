@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
 		// 클라이언트가 보낸 데이터는 HttpServletRequest 객체에 저장된다.
 		// getParameter("key" 또는 input태그의 name속성의 값 ) 메소드를 사용해서 데이터를 가져온다. 
 		
-		// 글자 깨짐 현상을 방지하기 위해 이 코드 추가함 
+		// 글자 깨짐 현상을 방지하기 위해 이 코드 추가함 ( 파라미터를 가져오기 전에 인코딩 설정해야함 ) 
 		request.setCharacterEncoding("utf-8");
 		
-		
+		// getParameter()의 반환타입은 String
 		String userId = request.getParameter("userId");
 		String pw = request.getParameter("pw");
 		
@@ -70,6 +70,8 @@ public class LoginServlet extends HttpServlet {
 		
 		// System.out.println("post방식으로 처리하기");
 		
+		// 서버측에서는 get방식이건 post방식이건 똑같기 때문에 한가지 방법으로 처리해버린다. 
+		// default방식이 get방식이기때문에 doPost()메소드 안에서 doGet() 메소드를 호출한다 
 		doGet(request, response);
 		
 		// 페이지에서 로그인하면 콘솔에 아이디와 패스워드가 출력된다  ( doGet() 메소드를 실행했기때문에 ) 

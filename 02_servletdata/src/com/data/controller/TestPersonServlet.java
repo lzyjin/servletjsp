@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -31,8 +30,13 @@ public class TestPersonServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+		// HttpServletRequest 객체와 HttpServletResponse 객체에 encoding 설정
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		
+		
 		
 		// 클라이언트가 보낸 파라미터 값 받아오기
 		
@@ -40,13 +44,17 @@ public class TestPersonServlet extends HttpServlet {
 		// request.getParameter("key") : 단일값에 대해 가져올 때 사용한다 
 		String name = request.getParameter("name");
 		
+		
 		// 기본적으로 전송되는 데이터는 모두 문자열로 받기 때문에 다른 데이터타입으로 변환하려면 파싱처리해야한다
 		int age = Integer.parseInt(request.getParameter("age"));
 		double height = Double.parseDouble(request.getParameter("height"));
 		
+		
 		// 라디오버튼도 단일값임 
 		String color = request.getParameter("color");
 		String animal = request.getParameter("animal");
+		
+		
 		
 		
 		// 2. 다중값 데이터 받기
@@ -55,17 +63,22 @@ public class TestPersonServlet extends HttpServlet {
 		
 		
 		
+		
+		
 		System.out.println("이름 : " + name);
 		System.out.println("나이 : " + age);
 		System.out.println("키 : " + height);
 		System.out.println("색상 : " + color);
 		
-		// System.out.println("음식 : " + Arrays.asList(foods)); // ?????? 
+		// System.out.println("음식 : " + Arrays.asList(foods)); 
+		
+		
 		System.out.print("음식 : ");
 		for(String f : foods) {
 			
-			System.out.println(f + " ");
+			System.out.print(f + " ");
 		}
+		System.out.println();
 		
 		System.out.println("동물 : " + animal);
 	
@@ -91,23 +104,27 @@ public class TestPersonServlet extends HttpServlet {
 			
 		}
 		
-		System.out.println(sendData);
+		// System.out.println(sendData); // 배열의 주소값이 출력 
 		
 		for(String[] v : sendData) {
 			
 			for(int i=0; i < v.length; i++) {
 				
-				System.out.println(v[i]);
+				// System.out.println(v[i]); // value만 출력 
 			}
 		}
 		
 		
 		
-		// 전송된 key value값을 한번에 받을 수 있는 기능
+		
+		
+		// 4. 전송된 key value값을 한번에 받을 수 있는 기능
 		// getParameterMap() : Map 객체를 이용해서 클라이언트가 전송한 값을 key, value로 출력
 		
+		
 		Map<String, String[]> param = request.getParameterMap();
-		System.out.println(param);
+		// System.out.println(param);
+		
 		
 		// Map 출력
 		Set<Map.Entry<String, String[]>> entry = param.entrySet();
@@ -117,20 +134,25 @@ public class TestPersonServlet extends HttpServlet {
 		while(it.hasNext()) {
 			
 			Map.Entry<String, String[]> p = it.next();
-			System.out.println("key값 : " + p.getKey());
+			
+			System.out.println("key : " + p.getKey());
 			
 			for(String s : p.getValue()) {
 				
-				System.out.print("value값 : " + s);
+				System.out.print(" value : " + s);
 			}
 			System.out.println();
 		}
 		
 		
+
+		
 		
 		// request 객체에 setAttribute로 넣은 값을 가져오기
 		String msg = (String) request.getAttribute("msg");
 		Date today = (Date) request.getAttribute("today");
+		
+		
 		
 		// 만약 attribute로 값을 가져올 때 key와 연결되어 있는 데이터가 없다면 null값을 반환한다 ( 에러 발생하지 않는다 )
 		System.out.println("attribute : " + msg);
@@ -138,16 +160,20 @@ public class TestPersonServlet extends HttpServlet {
 		
 		
 		
+		
+		
+		
 		// 기본 응답 페이지 작성해보자 
 		// 응답하기위해서는 HttpServletResponse 객체를 이용한다 
 		// 응답하기 위한 클라이언트의 정보를 가지고 있다 
+		// ( request는 데이터를 관리, response는 응답을 관리 )
 		
-		// 1. 응답하는 방식을 결정. response.setContentType() 
-		// 전송되는 데이터 형식 (MIME type) , 인코딩방식을 결정
+		// 1. 응답하는 방식을 결정. response.setContentType() -( 브라우저는 넘어오는 데이터를 mime타입으로 알 수 있다)
+		// 전송되는 데이터 형식 (MIME type)과 인코딩방식을 결정
 		response.setContentType("text/html;charset=utf-8");
 		
 		
-		// 클라이언트와 연결되는 문자열 Stream을 가져오는 메소드
+		// 2. 클라이언트와 연결되는 문자열 Stream을 가져오는 메소드
 		// getWriter() 
 		PrintWriter out=response.getWriter();
 		String html="<html>";
