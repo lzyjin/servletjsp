@@ -58,7 +58,7 @@ public class UseDataServlet extends HttpServlet {
 		html += "<li>contextData : " + contextData + "</li>";
 		html += "</ul>";
 		html += "<button onclick='location.assign(\"/02_servletdata/sessiondel.do\");'>session삭제</button>"; // 버튼 추가 -> 버튼 누르면 세션이 삭제된다 
-		html += "</body>";  //location.assign()다시보기 
+		html += "</body>";  
 		html += "</html>";
 		
 		out.print(html);

@@ -36,16 +36,18 @@ public class LoginCheckServlet extends HttpServlet {
 		
 		if(id.equals("admin") && pw.equals("1234")) {
 			
-			System.out.println(id + " " + pw);
+//			System.out.println(id + " " + pw);
 			
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("userId", id);
-		
-		} else {
 			
-			System.out.println(id + " " + pw);
 		}
+		
+//		} else {
+			
+//			System.out.println(id + " " + pw);
+//		}
 		
 		
 		// 화면 출력 서블릿으로 전환 

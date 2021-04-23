@@ -76,6 +76,7 @@ public class ShareDataServlet extends HttpServlet {
 		
 		response.sendRedirect("usedata.do");
 		// response를 썼다는것 = 응답했다 = request가 유지되지 않는다  -> requestData 가 null이 나온다 
+		
 		// session은 지울때까지, context는 서버가 꺼질때까지 살아있기 때문에 데이터가 유지된다 
 		
 		

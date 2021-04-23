@@ -31,9 +31,18 @@ public class RequestListenerTest implements ServletRequestListener, ServletReque
     
     public void requestInitialized(ServletRequestEvent sre)  { 
         
+    	
     	System.out.println("요청이 들어옴");
     	
-    	System.out.println( sre.getServletContext().getContextPath() ); // 어플리케이션 이름
+    	
+    	
+    			// 어떤 어플리케이션에 대한 요청인지 확인 가능 
+    	
+    	System.out.println( sre.getServletContext().getContextPath() ); // 어플리케이션(프로젝트) 이름
+    	
+    	
+    			// 요청한 url주소를 알 수 있음
+    	
     	System.out.println( ((HttpServletRequest) sre.getServletRequest()).getRequestURL() );
     	
     	String url = new String( ((HttpServletRequest) sre.getServletRequest()).getRequestURL() );

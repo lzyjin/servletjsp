@@ -41,14 +41,14 @@ public class PrintMainViewServlet extends HttpServlet {
 				// 로그인 되었을 때의 화면 
 			
 			html += "<h1>" + sessionId + "님, 환영합니다</h1>";
-			html += "<button onclick='location.replace(\"" + request.getContextPath() + "\");'>로그아웃</button>";
+			html += "<button onclick='location.replace(\"" + request.getContextPath() + "/sessiondel.do\");'>로그아웃</button>";
 			
 		} else {
 			
 				// 로그인이 되지 않았을 때 화면
 			
 			html += "<h1 style='color:red;'>Warnning : 로그인을 해야 볼 수 있습니다</h1>";
-			html += "<button onclick='location.replace(\"" + request.getContextPath() + "/views/login.html\");'>로그아웃</button>";
+			html += "<button onclick='location.replace(\"" + request.getContextPath() + "/views/login.html\");'>로그인</button>";
 		}
 		
 		html += "</body>";

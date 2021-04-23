@@ -18,6 +18,7 @@ public class ContextListenerTest implements ServletContextListener, ServletConte
 	public void contextDestroyed(ServletContextEvent sce) {
 		
 		// 서버가 종료되면 실행되는 리스너 메소드 
+		
 		System.out.println("서버가 종료됨..흑흑 망함...");
 		
 		Date today = new Date();
@@ -30,6 +31,7 @@ public class ContextListenerTest implements ServletContextListener, ServletConte
 	public void contextInitialized(ServletContextEvent sce) {
 		
 		// 서버가 시작되면 실행되는 리스너 메소드 
+		
 		System.out.println("서버가 시작됌");
 		
 	}
@@ -50,8 +52,8 @@ public class ContextListenerTest implements ServletContextListener, ServletConte
 		// ServletContext 객체에 setAttribute()로 값을 추가했을 때 실행 
 		System.out.println("context에 값을 추가함");
 		
-		System.out.println(event.getName());
-		System.out.println(event.getValue());
+		System.out.println(event.getName()); // data
+		System.out.println(event.getValue()); // 데이터입력!
 		
 	}
 
@@ -61,7 +63,7 @@ public class ContextListenerTest implements ServletContextListener, ServletConte
 	public void attributeRemoved(ServletContextAttributeEvent event) {
 		
 		// ServletContext 객체에 removeAttribute()로 값을 삭제했을 때 실행 
-		System.out.println("context에 값을 삭제함");
+		System.out.println("context의 값을 삭제함");
 	}
 
 
@@ -69,7 +71,7 @@ public class ContextListenerTest implements ServletContextListener, ServletConte
 	@Override
 	public void attributeReplaced(ServletContextAttributeEvent event) {
 		
-		System.out.println("context에 값을 수정함");
+		System.out.println("context의 값을 수정함");
 		
 	}
 
