@@ -22,6 +22,7 @@ public class WrapperTestServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 			System.out.println("test utf-8");
+			System.out.println("git test");
 		
 		String info = request.getParameter("info");
 		
