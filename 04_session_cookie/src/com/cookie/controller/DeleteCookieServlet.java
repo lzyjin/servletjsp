@@ -30,12 +30,11 @@ public class DeleteCookieServlet extends HttpServlet {
 		
 		Cookie c = new Cookie("userId", "");
 		
-		c.setMaxAge(0);
+		c.setMaxAge(0); // 유효기간 0초 = 유효기간 없다 
 		
 		response.addCookie(c);
 		
 		// 크롬 개발자창에서 확인 가능 
-		
 		
 		// 쿠키 삭제 후 바로 메인페이지로 이동
 		

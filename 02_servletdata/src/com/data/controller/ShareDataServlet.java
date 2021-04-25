@@ -66,15 +66,15 @@ public class ShareDataServlet extends HttpServlet {
 		
 				// RequestDispatcher를 이용해서 처리하기 
 		
-//		RequestDispatcher rd = request.getRequestDispatcher("usedata.do");
-//		
-//		rd.forward(request, response); // 다른 서블릿으로 전환 ( 응답한 상태가 아니다 )
+		RequestDispatcher rd = request.getRequestDispatcher("usedata.do");
+		
+		rd.forward(request, response); // 다른 서블릿으로 전환 ( 응답한 상태가 아니다 )
 		
 		
 		
 				// sendRedirect로 이동하면?
 		
-		response.sendRedirect("usedata.do");
+//		response.sendRedirect("usedata.do");
 		// response를 썼다는것 = 응답했다 = request가 유지되지 않는다  -> requestData 가 null이 나온다 
 		
 		// session은 지울때까지, context는 서버가 꺼질때까지 살아있기 때문에 데이터가 유지된다 

@@ -31,7 +31,7 @@ public class CookieCreateServlet extends HttpServlet {
 		
 		// 쿠키의 유효시간 설정
 		
-		c.setMaxAge(24*60*60); // 1일 
+		c.setMaxAge(24*60*60); // 1일  = 60초 * 60 * 24 
 		
 		
 		
@@ -45,7 +45,7 @@ public class CookieCreateServlet extends HttpServlet {
 		
 		Cookie c2 = new Cookie("email", "prince0324@naver.com");
 		
-		c2.setMaxAge(10);
+		c2.setMaxAge(10); // 유효기간 10초 ( 10초 후 자동 소멸 ) 
 		
 		response.addCookie(c2);
 		

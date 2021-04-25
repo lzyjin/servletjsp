@@ -31,7 +31,7 @@ public class SessionCreateServlet extends HttpServlet {
 		
 		session.setMaxInactiveInterval(10); // 10초
 		
-		session.setAttribute("checktest", "있음");
+		session.setAttribute("checktest", "있음"); 
 		
 		
 		

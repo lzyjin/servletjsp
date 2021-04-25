@@ -46,7 +46,7 @@ public class CheckSessionServlet extends HttpServlet {
 		}
 		
 		
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()); // 메인페이지로 이동 
 		
 		
 		

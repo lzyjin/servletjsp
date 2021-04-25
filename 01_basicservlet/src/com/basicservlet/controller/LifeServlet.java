@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LifeServlet
  */
-//@WebServlet("/life.do") 
+@WebServlet("/life.do") 
 // @WebServlet("/mypage.do") // 에러남 : 여기에는 중복된 주소(이미 있는 주소)가 들어가면 안된다 
-@WebServlet("/my/mypage.do") // 가능 
+//@WebServlet("/my/mypage.do") // 가능 
 public class LifeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

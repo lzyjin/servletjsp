@@ -49,6 +49,9 @@ public class CheckCookieServlet extends HttpServlet {
 				
 				System.out.println( "키 : " + c.getName() + ", 값 : " + c.getValue() );
 				
+				// 콘솔에 출력 
+				// 키 : userId, 값 : sanghyun
+				
 				
 				
 				html += "<li>" + c.getName() + " : " + c.getValue() + "</li>";
