@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="04_session_cookie" path="/04_session_cookie" reloadable="true" source="org.eclipse.jst.jee.server:04_session_cookie"/><Context docBase="yj_loginwork" path="/yj_loginwork" reloadable="true" source="org.eclipse.jst.jee.server:yj_loginwork"/></Host>
+      <Context docBase="04_session_cookie" path="/04_session_cookie" reloadable="true" source="org.eclipse.jst.jee.server:04_session_cookie"/><Context docBase="yj_loginwork" path="/yj_loginwork" reloadable="true" source="org.eclipse.jst.jee.server:yj_loginwork"/><Context docBase="05_jsp" path="/05_jsp" reloadable="true" source="org.eclipse.jst.jee.server:05_jsp"/></Host>
     </Engine>
   </Service>
 </Server>
