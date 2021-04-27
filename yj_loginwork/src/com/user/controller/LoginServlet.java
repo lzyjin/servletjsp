@@ -39,9 +39,9 @@ public class LoginServlet extends HttpServlet {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "STUDENT", "STUDENT");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "KH", "KH");
 			
-			pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PWD = ?");
+			pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?");
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, pw);
@@ -80,6 +80,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(result) {
 			
+			
 			System.out.println("로그인 성공");
 			
 			HttpSession session = request.getSession();
@@ -87,6 +88,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", userId);
 			
 			response.sendRedirect(request.getContextPath() + "/mainpage.do");
+			
 			
 		} else {
 			

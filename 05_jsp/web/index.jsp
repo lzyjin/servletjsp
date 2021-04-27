@@ -136,6 +136,22 @@
 	 <h2>session저장값은 <%=userId %></h2>
 	 <h2>application저장값은 <%=adminEmail %></h2>
 	 
+	 
+	 
+	 <!-- 0427 -->
+	 <h2><a href="views/membersearch.jsp">회원조회</a></h2>
+	 
+	 
+	 <h2>에러 페이지 설정하기</h2>
+	 
+	 <<h3><a href="views/errortest.jsp">에러 테스트하기</a></h3> 
+	 <!-- <h3><a href="views/errortest2.jsp">에러 테스트하기</a></h3> --> <!-- 404 에러 확인용 -->
+	 
+	 
+	 <h3>include 이용하기</h3>
+	 <h3><a href="views/content.jsp">메인화면</a></h3>
+	 
+	 
 	
 </body>
 </html>
