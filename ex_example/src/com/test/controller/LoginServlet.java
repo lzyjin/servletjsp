@@ -27,22 +27,31 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 클라이언트가 보낸 데이터 가져오기
+		
 		String userId = request.getParameter("userId");
 		String pwd = request.getParameter("pwd");
 		
 		
+		
 		// DB에 userId, pwd가 일치하는 회원이 있는지 확인
+		// 여기서부터 jdbc 
+		
 		TestService service = new TestService();
 		
 		Member m = service.login(userId, pwd);
 		
 		
+		
 		// DB에서 가져온 결과를 가지고 로그인 처리 한다
+		
 		if(m != null) {
 			
 			// 로그인 성공
+			
 			HttpSession session = request.getSession();
+			
 			session.setAttribute("loginMember", m);
+			
 			// 세션에 Member객체 m을 저장 
 			
 		} else {
@@ -51,10 +60,13 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		
+		
 		// 응답 페이지 설정 
-		RequestDispatcher rs = request.getRequestDispatcher("");
+		
+		RequestDispatcher rs = request.getRequestDispatcher(""); // 메인으로
 		
 		rs.forward(request, response);
+		
 	}
 	
 

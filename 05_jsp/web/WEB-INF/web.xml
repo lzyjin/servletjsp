@@ -10,12 +10,16 @@
 	  <location>/views/error/500page.jsp</location>
   </error-page>
   
+  
+  
   <error-page>
 	  <error-code>404</error-code>
 	  <location>/views/error/404page.jsp</location>
   </error-page>
   
   
+  <!-- 에러 타입으로도 에러페이지를 등록할 수 있는데, 
+  이러면 모든 에러타입별로 에러페이지를 설정하기 번거로우므로 위 방법을 이용하는게 나을수도 있다 -->
   <error-page>
   		<exception-type>java.lang.ArrayIndexOutOfBoudsException</exception-type>
   		<location>/views.indexError.jsp</location>

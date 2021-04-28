@@ -15,9 +15,5 @@
 	<h4><%=exception.getMessage()%></h4>
 	
 	
-	
-	
-	
-	
 </body>
 </html>

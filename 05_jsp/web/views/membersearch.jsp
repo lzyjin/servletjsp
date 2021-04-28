@@ -1,7 +1,8 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.util.List, java.util.ArrayList, com.member.model.vo.Member"%>
+    import="java.util.List, java.util.ArrayList, com.member.model.vo.Member"%> 
+    <!-- 외부에 있는 java파일을 사용할 때 지시자 태그 안에 import를 작성 -->
 
 <%
 

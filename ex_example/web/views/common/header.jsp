@@ -5,6 +5,10 @@
 <%
 
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+	/* 로그인하면 (Member)session.getAttribute("loginMember")의 값이 null이 아님
+	-> 이걸로 분기처리해서 로그인 성공인지 실패인지 처리 가능 */
+
 %>
 <!DOCTYPE html>
 <html>

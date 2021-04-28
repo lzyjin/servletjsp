@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> <!-- 이건 없으면 안돼 !!!  -->
 
     <%@ include file="/views/common/header.jsp" %>
 
    <section>
-   		<h2><%=name%>님의 이메일은 <%=email%>입니다</h2> <!-- header.jsp에서 선언한 자바 변수를 include한 페이지에서 사용 가능 -->
+   
+   		<!-- header.jsp에서 선언한 자바 변수를 include한 페이지에서 사용 가능 -->
+   		<h2><%=name%>님의 이메일은 <%=email%>입니다</h2> 
+       
        <h1>내용이 나오는 부분입니다</h1>
        <p>welcome to JSP</p>
+       
        <table>
            <tr>
                <td>이름</td>

@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.member.model.vo.Member" %>
+    
+<%
+
+	// 서버에서 전송된 request의  loginMember를 가져오기
+	/* Member loginMember = (Member)request.getAttribute("loginMember"); */
+	
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +28,13 @@
 		
 			<h1>Hello MVC</h1>
 			
+			
 			<div class="login-container">
+			
+			<% if(loginMember == null) { %>
+			
 				
-				<form id="loginFrm" action=""  method="post" onsubmit="return fn_login_validate();"> <!-- 함수 결과가 true면 submit -->
+				<form id="loginFrm" action="<%=request.getContextPath()%>/login"  method="post" onsubmit="return fn_login_validate();"> <!-- 함수 결과가 true면 submit -->
 					
 						<table>
 							
@@ -72,7 +86,24 @@
 					
 				</form>
 				
+				
+				<% } else {  System.out.println("header" + loginMember.getUserName()); %>
+			
+				<table>
+				
+					<tr>
+					
+						<td><%= loginMember.getUserName() %>님, 환영합니다</td>
+					
+					</tr>
+					
+				</table>
+			
+			<% }  %>
+				
+				
 			</div>
+			
 			
 			
 			<nav>

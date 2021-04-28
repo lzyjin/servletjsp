@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ page import="java.util.List, com.member.model.vo.Member" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,26 +55,25 @@
 			<th>나이</th>
 		</tr>
 		
-			<!-- 반복문 안에 <tr>을 쓰는 이유 : 반복될때마다 row(데이터)가 새로 생성되어야 하기 때문  -->
+			<!-- 
+				반복문 안에 <tr>을 쓰는 이유 : 반복될때마다 row(데이터)가 새로 생성되어야 하기 때문  
+				한개의 row(<td>태그)가 한 개의 Member
+			-->
 			
 			<% for(Member m : members) { %>
 			
 			<tr>
 			
-				<td><%=m.getMemberId() %></td>
-				<td><%=m.getMemberPwd() %></td>
-				<td><%=m.getMemberName() %></td>
-				<td><%=m.getAge() %></td>
+				<td><%= m.getMemberId() %></td>
+				<td><%= m.getMemberPwd() %></td>
+				<td><%= m.getMemberName() %></td>
+				<td><%= m.getAge() %></td>
 				
 			</tr>
 			
 			<% } %>
 		
 	</table>
-	
-	
-	
-	
 	
 	
 </body>

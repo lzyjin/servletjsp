@@ -7,7 +7,7 @@ public class Member {
 	private String memberName;
 	private int age;
 	
-	// db의 테이블과 연결되어있다
+	// vo는 db의 테이블과 연결되어있다
 	
 	public Member() {
 		
