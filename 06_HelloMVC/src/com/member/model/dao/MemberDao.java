@@ -9,11 +9,14 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static com.common.JDBCTemplate.close;
+
 import com.member.model.vo.Member;
 
 public class MemberDao {
 	
 	Properties prop = new Properties();
+	
+	private int result;
 	
 	public MemberDao() {
 		
@@ -81,6 +84,48 @@ public class MemberDao {
 	
 		
 		return m;
+	}
+
+
+	public int insertMember(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		
+		boolean flag = false;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("insertMember"));
+			
+			// result = pstmt.executeUpdate(); 이 위치 아님...
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getPassword());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getGender());
+			pstmt.setInt(5, m.getAge());
+			pstmt.setString(6, m.getEmail());
+			pstmt.setString(7, m.getPhone());
+			pstmt.setString(8, m.getAddress());
+			pstmt.setString(9, m.getHobby());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		return result;
+		
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member" %>
+<%@ page import="com.member.model.vo.Member, com.common.listener.LoginCheckListener, com.member.controller.LoginServlet"%>
     
 <%
 
@@ -8,6 +8,26 @@
 	/* Member loginMember = (Member)request.getAttribute("loginMember"); */
 	
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+	Cookie cookies[] = request.getCookies();
+	String saveId = null;
+	if(cookies != null) {
+		
+		for(Cookie c : cookies) {
+			
+			if(c.getName().equals("saveId")) {
+				// c의 key값이 saveId와 같으면 
+				
+				saveId = c.getValue();
+				// 변수에 c의 value값 저장 
+				
+				break;
+				
+			}
+		}
+	}
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -42,7 +62,9 @@
 							
 								<td>
 								
-									<input type="text" id="userId" name="userId" placeholder="아이디">
+									<!-- 표현식 안에 삼항연산자 사용 가능  -->
+									
+									<input type="text" id="userId" name="userId"  value="<%= saveId != null ? saveId : ""%>" placeholder="아이디">
 									
 								</td>
 								
@@ -70,11 +92,11 @@
 							
 								<td colspan="2">
 								
-									<input type="checkbox" name="saveId" id="saveId">
+									<input type="checkbox" name="saveId" id="saveId" <%= saveId != null ? "checked" : "" %>>
 									
 									<label for="saveId">아이디저장</label>
 									
-									<input type="button" value="회원가입" onclick="">
+									<input type="button" value="회원가입" onclick="location.assign('<%=request.getContextPath()%>/memberenroll.do')">
 								
 								</td>
 								
@@ -89,15 +111,35 @@
 				
 				<% } else {  System.out.println("header" + loginMember.getUserName()); %>
 			
-				<table>
-				
-					<tr>
-					
-						<td><%= loginMember.getUserName() %>님, 환영합니다</td>
-					
-					</tr>
-					
-				</table>
+			
+							<table id="logged-in">
+							
+								<tr>
+								
+									<td colspan="2"><%= loginMember.getUserName() %>님, 환영합니다</td>
+								
+								</tr>
+								
+								<tr>
+								
+									<td colspan="2">현재 접속자 수 : <%=LoginCheckListener.getCount()%>명</td>
+								
+								</tr>
+								
+								<tr>
+								
+									<td>
+											<input type="button" value="내 정보 보기">
+
+									</td>
+									<td>
+											<input type="button" value="로그아웃" onclick="location.assign('<%=request.getContextPath()%>/logout')">
+
+									</td>
+								
+								</tr>
+								
+							</table>
 			
 			<% }  %>
 				

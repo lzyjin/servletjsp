@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.member.model.vo.Member" %>   
+ 
+<%
+	 /* Member m = (Member)request.getAttribute("user");  이걸로 불러오는게 아니라 세션으로 불러와야해 */ 
+	 
+	 /* Member m = (Member)request.getAttribute("login_member"); session에 저장했는데 request로 불러오면 안되지요 */
+	 
+	 Member login_member = (Member)session.getAttribute("login_member");
+	 
+	 System.out.println(login_member);
+
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,52 +27,55 @@
 	<div id="container">
 	
 		<header>
+		
 			<h1>hello mvc</h1>
-			<div class="login-container">
-				
-				<form id="loginFrm" action="" method="post" onsubmit="return fn_login_validate();">
 			
+			<div class="login-container">
+			
+			<% if(login_member == null) { %>
+											<!-- 절대경로로 적기 위해 getContextPath 사용 -->
+					<form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post" onsubmit="return fn_login_validate();">
+				
+						<table>
+						
+								<tr>
+									<td><input type="text" name="userId" placeholder="아이디를 입력하세요"></td>
+								</tr>
+								
+								<tr>
+									<td><input type="password" name="password" placeholder="비밀번호를 입력하세요"></td> 
+									<td><input type="submit" value="로그인"></td>
+								</tr>
+							
+								<tr>
+									<td colspan="2">
+										<input type="checkbox" name="saveId" id="saveId"><label for="saveId">아이디저장</label>
+										<input type="button" value="회원가입" onclick="">
+									</td>
+								</tr>
+							
+						</table>
+					
+					</form>
+					
+				<% } else { %>
+				
+				
 					<table>
 					
 						<tr>
-						
-							<td>
-							
-								<input type="text" name="userId" placeholder="아이디를 입력하세요">
-								
-							</td>
-							
+							<td><%=login_member.getUserName()%></td>
 						</tr>
 						
 						<tr>
-						
-							<td>
-							
-								<input type="password" name="password" placeholder="비밀번호를 입력하세요">
-								
-							</td>
-							
-							<td>
-							
-								<input type="submit" value="로그인">
-								
-							</td>
-							
+							<td><input type="button" value="로그아웃" onclick=""></td>
 						</tr>
 					
-						<tr>
-						
-							<td colspan="2">
-							
-								<input type="checkbox" name="saveId" id="saveId"><label for="saveId">아이디저장</label>
-								<input type="button" value="회원가입" onclick="">
-								
-							</td>
-							
-						</tr>
+					
 					</table>
 				
-				</form>
+				
+				<% } %>
 				
 			</div>
 			
