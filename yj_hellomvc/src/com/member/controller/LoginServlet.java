@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(m != null) {
 			
-			System.out.println(m);
+			System.out.println("m : " + m);
 			
 			// 로그인 성공하면 
 			
@@ -45,6 +45,8 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("login_member", m);
+			
+			System.out.println("login : " + session);
 		
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/");
@@ -55,6 +57,11 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("msg", "로그인 실패. 다시 시도하세요.");
 			request.setAttribute("loc", "/");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/views/common/alertmsg.jsp");
+			
+			rd.forward(request, response);
+			
 			
 		}
 		

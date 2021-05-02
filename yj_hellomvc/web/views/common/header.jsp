@@ -18,8 +18,15 @@
 <head>
 <meta charset="UTF-8">
 <title>yj_hello mvc</title>
-<link rel="stylesheet"  type="text/css"  href="css/style.css">
-<script src = "<%=request.getContextPath()%>">/js/jquery-3.6.0.min.js</script>
+<!-- <link rel="stylesheet"  type="text/css"  href="css/style.css"> 상대경로로 적었더니 css파일을 못잡아서 적용이 안됐음 -->
+<link rel="stylesheet"  type="text/css"  href="<%=request.getContextPath()%>/css/style.css">
+
+<script src = "<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
+
+<!-- 이걸로 써도 되긴 됌 <script src = "/js/jquery-3.6.0.min.js"></script> -->
+
+<%-- 내가 잘못 쓴 코드 <script src ="<%=request.getContextPath() %>">js/jquery-3.6.0.min.js</script> --%>
+
 </head>
 
 <body>
@@ -34,23 +41,23 @@
 			
 			<% if(login_member == null) { %>
 											<!-- 절대경로로 적기 위해 getContextPath 사용 -->
-					<form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post" onsubmit="return fn_login_validate();">
+					<form id="loginFrm" action="<%=request.getContextPath()%>/login.do" method="post" onsubmit="return fn_login_validate()">
 				
 						<table>
 						
 								<tr>
-									<td><input type="text" name="userId" placeholder="아이디를 입력하세요"></td>
+									<td><input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요"></td>
 								</tr>
 								
 								<tr>
-									<td><input type="password" name="password" placeholder="비밀번호를 입력하세요"></td> 
+									<td><input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요"></td> 
 									<td><input type="submit" value="로그인"></td>
 								</tr>
 							
 								<tr>
 									<td colspan="2">
 										<input type="checkbox" name="saveId" id="saveId"><label for="saveId">아이디저장</label>
-										<input type="button" value="회원가입" onclick="">
+										<input type="button" value="회원가입" onclick="location.assign('<%=request.getContextPath()%>/enroll.do')">
 									</td>
 								</tr>
 							
@@ -68,7 +75,9 @@
 						</tr>
 						
 						<tr>
-							<td><input type="button" value="로그아웃" onclick=""></td>
+							<td><input type="button" value="로그아웃" onclick="location.assign('<%=request.getContextPath()%>/logout.do')"></td>
+							
+							<%-- <td><input type="button" value="로그아웃" onclick="location.assign('<%=request.getContextPath()%>/logout')"></td> --%>
 						</tr>
 					
 					
@@ -96,18 +105,21 @@
 		</header>
 		
 		
+		
 		<script>
 		
 			const fn_login_validate = () => {
 				
 				// id가 input태그안에 값이 있으면,  4글자 이상 이면 
 				const userId = $("#userId").val();
-				if(userId.trim().length < 4) {
-					
-					alert("아이디를 4글자 이상 입력하세요");
-					return false;
-					
-				}
+					console.log("outter");
+					if(userId.trim().length < 4) {
+
+						console.log("inner");
+						alert("아이디를 4글자 이상 입력하세요");
+						return false;
+						
+					}
 				
 				// password가 공란이 아니면 전송 
 				const pw = $("#password").val();

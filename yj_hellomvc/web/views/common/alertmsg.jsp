@@ -3,9 +3,10 @@
     
 <%
 
-	String msg = request.getParameter("msg");
-	String loc = request.getParameter("loc");
-
+	String msg = (String)request.getAttribute("msg");
+	/* String loc = request.getParameter("loc"); */
+	String loc = (String) request.getAttribute("loc");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +25,7 @@
 		
 		location.assign("<%=request.getContextPath()%><%=loc%>");
 	
+		
 	</script>
 
 

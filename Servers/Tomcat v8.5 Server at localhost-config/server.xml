@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="06_HelloMVC" path="/06_HelloMVC" reloadable="true" source="org.eclipse.jst.jee.server:06_HelloMVC"/><Context docBase="05_jsp" path="/05_jsp" reloadable="true" source="org.eclipse.jst.jee.server:05_jsp"/><Context docBase="yj_hellomvc" path="/yj_hellomvc" reloadable="true" source="org.eclipse.jst.jee.server:yj_hellomvc"/><Context docBase="yj_loginjdbc" path="/yj_loginjdbc" reloadable="true" source="org.eclipse.jst.jee.server:yj_loginjdbc"/></Host>
+      <Context docBase="yj_hellomvc" path="/yj_hellomvc" reloadable="true" source="org.eclipse.jst.jee.server:yj_hellomvc"/></Host>
     </Engine>
   </Service>
 </Server>
