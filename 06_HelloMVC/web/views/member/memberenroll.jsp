@@ -6,12 +6,15 @@
 
         <h2>회원 가입 정보 입력</h2>
         
-        <form action="<%=request.getContextPath()%>/memberenrollend.do" method="post" onsubmit="return fn_enroll_validate();" > <!-- 폼은 페이지 전송용  -->
+        <form name="memberEnrollFrm" action="<%=request.getContextPath()%>/memberenrollend.do" method="post" onsubmit="return fn_enroll_validate();" > <!-- 폼은 페이지 전송용  -->
         <table>
 			<tr>
 				<th>아이디</th>
 				<td>
 					<input type="text" placeholder="4글자이상" name="userId" id="userId_" required>
+					
+					<!-- 폼안에 버튼이 있으면 반드시 제출이 되버리므로 input타입버튼으로 해야한다  -->
+					<input type="button" value="중복검사" onclick="fn_id_duplicate();">
 				</td>
 			</tr>
 			<tr>
@@ -81,6 +84,18 @@
         </form>
     </section>
     
+    
+    <!-- 0503 -->
+    <form action="" name="checkDuplicateId">
+    
+    	<input type="hidden" name="userId">
+    
+    
+    </form>
+    
+    
+    
+    
     <script>
 
 		/*
@@ -142,8 +157,45 @@
 			return false;
 		} 
 		
+	}
+	
+	const fn_id_duplicate = () => {
 		
-
+		// alert("열기"); // 이벤트 연결 확인용
+		
+		// 1. 연결할 주소
+		const url = "<%=request.getContextPath()%>/checkDuplicateId"; /* 아이디 입력하면 db에 있는지 확인하는 코드가 이 안에 있어야 함  */
+		
+		// 2. 열 창의 이름 ( 이 이름으로 창을 지칭 )
+		const title = "checkDuplicateId";
+		
+		// 3. 창의 크기와 위치 
+		const status = "left=500px, top=100px, width=300px, height=200px";
+		
+		
+		window.open("", title, status); // 확인용 
+		
+		
+		// form안에 있는 hidden인 input값을 채우고, 윈도우(새 창)에서 그 결과를 받는 로직으로 설정 
+		
+		// form 태그는 name속성을 사용하면 그 name속성으로 직접접근이 가능하다 
+		console.log(checkDuplicateId);
+		
+		// form의 name속성값으로 필요한 데이터 세팅하기 
+		checkDuplicateId.userId.value = $("#userId_").val(); // 직접접근 가능해서 
+		
+		checkDuplicateId.method = "post";
+		
+		checkDuplicateId.action = url;
+		
+		// 여기서 말하는 form = checkDuplicateId
+		
+		// 이 form태그가 제출되는 윈도우를 지정 
+		checkDuplicateId.target = title;
+		
+		
+		// 제출 ( 전송 )
+		checkDuplicateId.submit();
 	}
     
 

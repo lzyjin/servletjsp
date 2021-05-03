@@ -35,7 +35,7 @@
 <head>
 <meta charset="UTF-8">
 <title>HelloMVC</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css">
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 
@@ -129,8 +129,9 @@
 								<tr>
 								
 									<td>
-											<input type="button" value="내 정보 보기">
-
+											<%-- <input type="button" value="내 정보 보기" onclick="location.assign('<%=request.getContextPath()%>/views/member/mypage.jsp')"> --%>
+												<input type="button" value="내 정보 보기" onclick="location.assign('<%=request.getContextPath()%>/memberView.do?userId=<%=loginMember.getMemberId()%>')">
+												<!-- 쿼리스트링 작성시 ""사용하지 않음  -->
 									</td>
 									<td>
 											<input type="button" value="로그아웃" onclick="location.assign('<%=request.getContextPath()%>/logout')">

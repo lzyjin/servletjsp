@@ -128,4 +128,145 @@ public class MemberDao {
 		
 	}
 
+
+	public Member checkDuplicateId(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		Member m = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectMemberId"));
+			
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+					m = new Member();
+				
+				m.setMemberId(rs.getString("userid")); // rs가 쿼리 결과니까 테이블의 컬럼명으로 탐색
+				m.setPassword(rs.getString("password"));
+				m.setUserName(rs.getString("username"));
+				m.setGender(rs.getString("gender"));
+				m.setAge(rs.getInt("age"));
+				m.setEmail(rs.getString("email"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setHobby(rs.getString("hobby"));
+				m.setEnrollDate(rs.getDate("enrolldate"));
+			
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rs);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
+
+	public int memberInfoUpdate(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
+			
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+//			pstmt.setString(1, x);
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+	public int updateMember(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
+			
+			pstmt.setString(1, m.getPassword());
+			pstmt.setString(2, m.getUserName());
+			pstmt.setString(3, m.getGender());
+			pstmt.setInt(4, m.getAge());
+			pstmt.setString(5, m.getEmail());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getHobby());
+			pstmt.setString(9, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteMember(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("deleteMember"));
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 }
