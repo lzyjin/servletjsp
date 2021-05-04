@@ -119,6 +119,52 @@ public class MemberService {
 		
 		return result;
 	}
+
+
+	
+	public int updatePassword(String oldPw, String newPw) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updatePassword(conn, oldPw, newPw);
+		
+		if(result > 0) {
+			
+			commit(conn);
+			
+		} else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	/*
+	// 선생님 풀이 
+	public int updatePassword(String userId, String newPw) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updatePassword(conn, userId, newPw);
+		
+		if(result > 0) {
+			
+			commit(conn);
+			
+		} else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	*/
 	
 	
 

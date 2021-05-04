@@ -14,7 +14,8 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
 
-@WebServlet("/memberenrollend.do")
+//@WebServlet("/memberenrollend.do")
+@WebServlet(name="memberenrollendservlet", urlPatterns="/memberenrollend.do")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +27,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
+//		response.setCharacterEncoding("utf-8");
 		
 		// id, pw, name, age, email, phone, address, gender, hobby 
 		String id = request.getParameter("userId");

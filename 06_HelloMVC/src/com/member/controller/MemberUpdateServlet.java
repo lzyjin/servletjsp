@@ -11,7 +11,8 @@ import com.member.model.service.*;
 import com.member.model.vo.*;
 
 
-@WebServlet("/memberUpdate.do")
+//@WebServlet("/memberUpdate.do")
+@WebServlet(name="memberupdateservlet", urlPatterns="/memberUpdate.do")
 public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,11 +24,13 @@ public class MemberUpdateServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
 		
 		// 클라이언트가 보낸 회원정보 수정 
 		String userId = request.getParameter("userId");
-		String pw = request.getParameter("password");
+		
+//		String pw = request.getParameter("password");
+		
 		String userName = request.getParameter("userName");
 		int age = Integer.parseInt(request.getParameter("age"));
 		String gender = request.getParameter("gender");
@@ -41,7 +44,10 @@ public class MemberUpdateServlet extends HttpServlet {
 		Member m = new Member();
 		
 		m.setMemberId(userId);
-		m.setPassword(pw);
+		
+//		m.setPassword(pw);
+		m.setPassword("");
+		
 		m.setUserName(userName);
 		m.setAge(age);
 		m.setGender(gender);

@@ -20,8 +20,9 @@ public class MemberDeleteServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
 		
+		// 
 		String userId = request.getParameter("userId"); // 쿼리스트링 = input태그에 쓴것과 동일하므로 name값을 불러오는 이 코드와 같다 
 		
 		int result = new MemberService().deleteMember(userId);
@@ -51,7 +52,7 @@ public class MemberDeleteServlet extends HttpServlet {
 			// 탈퇴 실패 
 			
 			String msg = "탈퇴 실패";
-			String loc = "/";
+			String loc = "/memberView.do";
 			
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

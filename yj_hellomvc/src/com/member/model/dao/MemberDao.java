@@ -149,16 +149,12 @@ public class MemberDao {
 
 
 
-	public Member idCheck(Connection conn, String inputId) {
+	public Member idCheck(Connection conn, String userId) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = prop.getProperty("idCheck");
-		
-		System.out.println(sql);
-		
-		System.out.println("dao" + inputId);
+		String sql = prop.getProperty("selectMemberId");
 		
 		Member m = null;
 		
@@ -167,7 +163,7 @@ public class MemberDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, inputId);
+			pstmt.setString(1, userId);
 			
 			rs = pstmt.executeQuery();
 			

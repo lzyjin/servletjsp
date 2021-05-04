@@ -58,6 +58,7 @@
 				<br><br>
 				
 				<!-- 아이디 재입력창 구성 -->
+				<!-- servlet 매핑주소 .do로 바꾸고 다시 생각해보기  -->
 				<form action="<%= request.getContextPath()%>/checkDuplicateId" method="post"> <!-- 서블릿 재귀호출같은 느낌 .. -->
 					<input type="text" name="userId" id="userId_"> <!-- 회원가입창의 아이디입력창 name속성값과 동일해야한다  -->
 					<input type="submit" value="중복검사" >
@@ -79,10 +80,10 @@
 			
 			// 선생님 풀이
 			// 1. 현재 값(request에 저장되어있는 아이디 입력값 )을 부모창의 userId_에 대입
-			const userId = "<%=request.getParameter("userId")%>";
+			const userId = "<%=request.getParameter("userId")%>"; //(클라이언트가 입력한값(요청보낼때 사용한 값) 
 			
 			/* opener : 부모 윈도우 객체  */
-			// 2. ( 부모창의 ) 회원가입창의 아이디 입력창의 값 
+			// 2. ( 부모창의 ) 회원가입창의 아이디 입력창의 값에 
 			opener.memberEnrollFrm.userId.value = userId;
 			
 			// 3. 비밀번호 창으로 포커스 주기

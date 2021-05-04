@@ -175,36 +175,6 @@ public class MemberDao {
 	}
 
 
-	public int memberInfoUpdate(Connection conn, Member m) {
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			
-			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
-			
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-//			pstmt.setString(1, x);
-			
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 
 
 	public int updateMember(Connection conn, Member m) {
@@ -216,15 +186,15 @@ public class MemberDao {
 			
 			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
 			
-			pstmt.setString(1, m.getPassword());
-			pstmt.setString(2, m.getUserName());
-			pstmt.setString(3, m.getGender());
-			pstmt.setInt(4, m.getAge());
-			pstmt.setString(5, m.getEmail());
-			pstmt.setString(6, m.getPhone());
-			pstmt.setString(7, m.getAddress());
-			pstmt.setString(8, m.getHobby());
-			pstmt.setString(9, m.getMemberId());
+//			pstmt.setString(1, m.getPassword());
+			pstmt.setString(1, m.getUserName());
+			pstmt.setString(2, m.getGender());
+			pstmt.setInt(3, m.getAge());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setString(6, m.getAddress());
+			pstmt.setString(7, m.getHobby());
+			pstmt.setString(8, m.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -268,5 +238,67 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	
+	public int updatePassword(Connection conn, String oldPw, String newPw) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("updateMemberPw"));
+			
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, oldPw);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
+	
+	
+	/*
+	// 선생님 풀이
+	public int updatePassword(Connection conn, String userId, String newPw) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("updatePassword"));
+			
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	 */
 
 }

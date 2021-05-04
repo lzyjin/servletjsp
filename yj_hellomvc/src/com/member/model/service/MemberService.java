@@ -55,14 +55,14 @@ public class MemberService {
 
 
 
-	public Member idCheck(String inputId) {
+	public Member idCheck(String userId) {
 		
 		Connection conn = null;
 		
 		conn = createConnection();
 		
 		MemberDao mDao = new MemberDao();
-		Member m = mDao.idCheck(conn, inputId);
+		Member m = mDao.idCheck(conn, userId);
 		
 		close(conn);
 		

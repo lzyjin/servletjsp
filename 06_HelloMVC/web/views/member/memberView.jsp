@@ -28,7 +28,8 @@
 							<!-- 아이디는 바뀌면 안된다  -> disabled ? readonly? -> disabled : 서버에 데이터를 전송하지 않음, readonly는 보냄 -> readonly 사용  -->
 						</td>
 					</tr>
-					<tr>
+					
+					<%-- <tr>
 						<th>패스워드</th>
 						<td>
 							<input type="password" name="password" id="password_" required="required" value="<%=m.getPassword()%>">
@@ -39,7 +40,8 @@
 						<td>	
 							<input type="password" id="password_2" required="required"><br>
 						</td>
-					</tr>  
+					</tr>   --%>
+					
 					<tr>
 						<th>이름</th>
 						<td>	
@@ -111,8 +113,6 @@
 					<tr>
 						<th>취미 </th>
 						<td>
-							
-							
 						
 							<input type="checkbox" name="hobby" id="hobby0" value="운동" <%= m.getHobby().contains("운동") ? "checked" : ""%>><label for="hobby0">운동</label>
 							<input type="checkbox" name="hobby" id="hobby1" value="등산" <%= m.getHobby().contains("등산") ? "checked" : ""%>><label for="hobby1">등산</label>
@@ -120,15 +120,24 @@
 							<input type="checkbox" name="hobby" id="hobby3" value="게임" <%= m.getHobby().contains("게임") ? "checked" : ""%>><label for="hobby3">게임</label>
 							<input type="checkbox" name="hobby" id="hobby4" value="여행" <%= m.getHobby().contains("여행") ? "checked" : ""%>><label for="hobby4">여행</label><br />
 							
-	
 						</td>
 					</tr>
 				</table>
+				
 				<input type="button" value="정보수정" onclick="fn_update_member();">
 				<!-- <button>정보수정 btn</button> --> <!-- form안에 있는 button태그는 submit기능을 한다 -> submit기능 없이 하려면 button태그 안에 type=button적어야함  -->
+				
+				<button type="button" onclick="fn_password_update();">비밀번호변경</button>
+				
 				<input type="button" value="탈퇴" onclick="fn_delete_member();"> 
 			</form>
 		</section>
+		
+		<form name="updatePassword">
+			
+			<input type="hidden" name="userId">
+		
+		</form>
 		
 	<script>
 	
@@ -197,6 +206,50 @@
 				
 				// 탈퇴 취소 
 			}
+		}
+		
+		
+		
+		
+		const fn_password_update = () => {
+			
+			
+				
+				
+			
+				const url = "<%=request.getContextPath()%>/updatePassword.do?userId=" + "<%=loginMember.getMemberId()%>";
+				
+				const name = "updatePasswordPage";
+				
+				// 새창의 크기 : width 400, height=210 left 500 top 200
+				
+				const spec = "width=400, height=210, left=500, top=200";
+				
+				window.open("", name, spec);
+				
+				
+				//hidden form태그 만들어서 거기에 비밀번호 담아서 보냄 
+				
+				// form태그 name = updatePassword
+				updatePassword.userId = "<%=m.getMemberId()%>";
+				
+				updatePassword.method = "post";
+				
+				updatePassword.action = url;
+				
+				updatePassword.target = name;
+				
+				updatePassword.submit();
+				
+				
+				
+				// 선생님 풀이 
+				<%-- const url = "<%=request.getContextPath()%>/updatePassword.do?userId=<%=m.getMemberId()%>";
+				
+				const name = "updatePasswordPage";
+				const spec = "width=400, height=210, left=500, top=200";
+				
+				window.open(url,"_blank", name, spec); --%>
 		}
 		
 	</script>	

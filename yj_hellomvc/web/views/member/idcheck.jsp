@@ -1,53 +1,74 @@
-<%@page import="com.member.controller.IdCheckServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.member.model.vo.Member" %>
 <%
-	String checkEndId = (String)session.getAttribute("checkEndId");
-
-	System.out.println("checkEndId : " + checkEndId);
+	Member result = (Member)request.getAttribute("result");
 %>
-    
-<%@ include file="/views/common/header.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>아이디 중복 확인</title>
+<style>
+	div#checkId-container {
+		
+		text-align: center;
+		padding-top: 50px
+	}
 
-	<!-- 팝업창 --> 
+	span#duplicated{
 
-	<h1>아이디 중복 검사 </h1>
+		color: red;
+		font-weight: bolder;
+	}
+</style>
+</head>
+<body>
+
+	<!-- 1. 해더풋터가 필요할까? - 필요없어 
+	2. 화면내용 -->
 	
-	<div>
-		<form action="<%=request.getContextPath()%>/idcheck.do"> <!-- form으로 전송하지 않으면 다른창에서 request로 값에 접근할 수 없다 --> 
-			<table>
+	<div id="checkId-container">
+	
+			<% if(result == null) { %>
+		
 			
-				<tr>
-				
-					<!-- <td><input type="text" name="inputidCheck_" id="inputidCheck_"></td> -->
-					<td><input type="text" name="inputidCheck_" id="inputidCheck_"></td>
+					[<span><%=request.getParameter("hiddenuserId")%></span>]는 사용가능합니다.	
 					
-					<td><%-- <input type="button" name="checkid" id="checkid" value="중복확인" onclick="location.replace('<%=request.getContextPath()%>/idcheck.do')"> --%>
-							<input type = "submit" value ="중복확인" name = "checkid" id = "checkid">
-					</td>
-				</tr>
-				
-				
-			</table>
-		</form>
-	
+					<br><br>
+					
+					<button type="button" onclick="fn_close();">닫기</button>
+					
+			
+			<% } else { %>
+			
+
+					[<span id="duplicated"><%=request.getParameter("hiddenuserId")%></span>]는 사용중입니다.
+					<br><br>
+					
+					<!-- 아이디 재입력창 구성 -->
+					<form action="<%=request.getContextPath()%>/idcheck.do" method="post">
+					
+						<!-- <input type="text" name="userId_" id="userId_"> -->
+						<input type="text" name="hiddenuserId" id="userId_"> <!-- name이 같아야함  -->
+						<input type="submit" value="중복검사" >
+						
+					</form>
+			
+			<% } %>
+		
 	</div>
 	
-	
 	<script>
-	
 		
-		document.getElementById("inputidCheck_").value = opener.document.userId_.value;
-	
-		<% if(checkEndId != null) { %>
-		
-			/* window.opener.document.getElementById("userId_").value = checkEndId; */
+		const fn_close = () => {
+			
+			opener.enrollForm.userId_.value = "<%=request.getParameter("hiddenuserId")%>";
+			
 			window.close();
-		
-		<% } %>
-		
+		}
 	
 	</script>
-
-<%@ include file="/views/common/footer.jsp" %>
+	
+</body>
+</html>

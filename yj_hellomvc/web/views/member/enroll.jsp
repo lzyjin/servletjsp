@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-	/* String checkEndId = (String)session.getAttribute("checkEndId"); */
-	String checkEndId = (String)request.getAttribute("checkEndId");
-
-	System.out.println("checkEndId : " + checkEndId);
+	
 %>
 
 <%@ include file="/views/common/header.jsp" %>
@@ -14,7 +11,7 @@
 
         <h2>회원 가입 정보 입력</h2>
         
-        <form action="<%=request.getContextPath()%>/enrollend.do" method="post" onsubmit="return fn_enroll_validate();" > <!-- 폼은 페이지 전송용  -->
+        <form name="enrollForm" action="<%=request.getContextPath()%>/enrollend.do" method="post" onsubmit="return fn_enroll_validate();" > <!-- 폼은 페이지 전송용  -->
         
 	        <table>
 	        
@@ -22,22 +19,13 @@
 					<th>아이디</th>
 					<td>
 					
-						<% if(checkEndId == null) { %>
 						
-							<script>
-								
-							</script>
 					
-							<input type="text" placeholder="4글자이상" name="userId_" id="userId_" required>
-						
-						<% } else { %>
-						
-							<input type="text" name="userId_" id="userId_" value = "<%=checkEndId%>" required>
-						
-						<% }%>
+						<input type="text" placeholder="4글자이상" name="userId_" id="userId_" required>
 						
 						<%-- <input type="button" value="아이디 중복 확인" onclick="location.assign('<%=request.getContextPath()%>/idcheck.do')"> --%>
-						<input type="button" value="아이디 중복 확인" onclick="window.open('idcheck.jsp', 'pop', 'width=500', 'height=500')">
+						<!-- <input type="button" value="아이디 중복 확인" onclick="window.open('idcheck.jsp', 'pop', 'width=500', 'height=500')"> -->
+						<input type="button" value="아이디 중복 확인" onclick="fn_idcheck();">
 					
 					</td>
 				</tr>
@@ -121,6 +109,14 @@
         
     </section>
 
+	
+	<form name="idcheck">
+		
+		<!-- 사용자가 입력한 아이디를 받아올 폼 -->
+		<input type="hidden" name="hiddenuserId" id="" >
+
+	</form>
+
 	<script>
 		   
 			  const fn_enroll_validate = () => {
@@ -166,7 +162,39 @@
 					});
 					
 				} );
-			  
+				
+				
+				const fn_idcheck = () => {
+					
+					// window.open(url, name, features, replace);
+					
+					// 회원가입창에서 입력한 아이디를 받아와서 검사해야함
+					
+
+					const url = "<%=request.getContextPath()%>/idcheck.do";
+					const name = "idcheck_page";
+					const features = "width=300, height=300, left=500, top=100";
+					
+					window.open(url,name, features);
+					
+					
+					
+					// hidden속성의 input태그를 가진 form태그를 이용하는 방법 
+					// 이 form태그안에 있는 input에 사용자가 입력한 아이디를 넣는다
+					
+					idcheck.hiddenuserId.value = $("#userId_").val();
+					idcheck.method = "post";
+					idcheck.action = url;
+
+					// 이  form이 제출(submit)되는 윈도우 지정하기 
+					// = form의 정보를 가지고 servlet에서 이용할 것 
+					// = 팝업창의 주소 = 서블릿의 주소 
+					idcheck.target = name;
+					
+					// 제출
+					idcheck.submit();
+					
+				}			  
 		
 	</script>
     

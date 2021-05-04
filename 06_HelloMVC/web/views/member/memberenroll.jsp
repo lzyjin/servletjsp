@@ -167,7 +167,7 @@
 		const url = "<%=request.getContextPath()%>/checkDuplicateId"; /* 아이디 입력하면 db에 있는지 확인하는 코드가 이 안에 있어야 함  */
 		
 		// 2. 열 창의 이름 ( 이 이름으로 창을 지칭 )
-		const title = "checkDuplicateId";
+		const title = "checkDuplicateIdPage";
 		
 		// 3. 창의 크기와 위치 
 		const status = "left=500px, top=100px, width=300px, height=200px";
