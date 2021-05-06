@@ -1,12 +1,16 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.security.*;
+
+import javax.crypto.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.*;
 import com.member.model.service.*;
 import com.member.model.vo.*;
 
@@ -29,6 +33,22 @@ public class MemberViewServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		
 		Member m = new MemberService().checkDuplicateId(userId); // 이미 만들어놓은 서블릿을 활용 
+		
+		
+		// 0506 
+		// 암호화된 이메일과 주소를 복호화 
+		try {
+			
+			m.setPhone(AESCryptor.decrypt(m.getPhone()));
+			m.setEmail(AESCryptor.decrypt(m.getEmail()));
+			
+		} catch (Exception e) {
+			
+			// e.printStackTrace();
+			// 주석처리해서 암호화처리하지 않은 계정으로 로그인했을때 뜨는 예외를 보여주지 않게 
+		}
+		
+		
 		
 		// m == null 
 		// -> 일치하는 회원이 없어서 회원정보 수정 불가 

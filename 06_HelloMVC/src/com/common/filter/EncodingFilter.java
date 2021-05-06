@@ -9,6 +9,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import com.common.*;
+
 
 @WebFilter("/*")
 public class EncodingFilter implements Filter {
@@ -28,6 +30,9 @@ public class EncodingFilter implements Filter {
 		
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		
+		
+		
 		
 		
 		chain.doFilter(request, response);

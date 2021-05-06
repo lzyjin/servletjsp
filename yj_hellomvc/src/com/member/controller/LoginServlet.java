@@ -5,10 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
@@ -33,6 +30,34 @@ public class LoginServlet extends HttpServlet {
 		
 		Member m = service.login(id, pw);
 		
+		
+		// 아이디 저장 기능 
+		// 1. header.jsp의 아이디저장 체크박스의 값 가져오기 
+		String saveId = request.getParameter("saveId");
+		
+		System.out.println("체크박스 값 : " + saveId); // on : 아이디를 입력하기만 하면 on이 된다. 
+		
+		// 클라이언트쪽에서 저장해도 상관없는 데이터들은 쿠키에 저장한다 
+		
+		// 체크박스 체크하면 on이 된다. 체크안하면 null이 된다 
+		// 결국 saveId가 null이 아니면 쿠키에 사용자아이디를 저장한다
+		
+		if(saveId != null) {
+			
+			// 쿠키에 아이디 저장 
+			Cookie cookie = new Cookie("saveId", id);
+			
+			// 쿠키 유효기간 7일로 설정하자
+			cookie.setMaxAge(60*60*24*7);
+			
+			// 생성된 쿠키는 클라이언트에게 저장요청한다
+			response.addCookie(cookie);
+		} 
+		
+		
+		
+		
+		
 		if(m != null) {
 			
 			System.out.println("m : " + m);
@@ -46,7 +71,6 @@ public class LoginServlet extends HttpServlet {
 			
 			session.setAttribute("login_member", m);
 			
-			System.out.println("login : " + session);
 		
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/");

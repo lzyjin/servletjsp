@@ -1,8 +1,10 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.security.*;
 import java.util.Date;
 
+import javax.crypto.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.*;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
@@ -35,8 +38,25 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String pw = request.getParameter("password");
 		String name = request.getParameter("userName");
 		int age = Integer.parseInt(request.getParameter("age"));
+		
+		
+		
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
+		
+		try {
+			
+			// 0506
+			// 암호화 처리 
+			email = AESCryptor.encrypt(email);
+			phone = AESCryptor.encrypt(phone);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		} 
+		
+		
 		String address = request.getParameter("address");
 		String gender = request.getParameter("gender");
 		// String hobby = request.getParameter("hobby");

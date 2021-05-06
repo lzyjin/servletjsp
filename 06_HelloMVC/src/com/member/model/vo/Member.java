@@ -2,6 +2,8 @@ package com.member.model.vo;
 
 import java.util.Date;
 
+import com.common.*;
+
 public class Member {
 	
 	private String memberId;
@@ -89,6 +91,10 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+//	public void setPhone(String phone) {
+//		this.phone = AESCryptor.decrypt(phone);
+//	}
 
 	public String getAddress() {
 		return address;

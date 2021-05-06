@@ -4,12 +4,30 @@
  
 <%
 	 /* Member m = (Member)request.getAttribute("user");  이걸로 불러오는게 아니라 세션으로 불러와야해 */ 
-	 
 	 /* Member m = (Member)request.getAttribute("login_member"); session에 저장했는데 request로 불러오면 안되지요 */
 	 
 	 Member login_member = (Member)session.getAttribute("login_member");
 	 
-	 System.out.println(login_member);
+	 // 쿠키 불러오기 
+	 Cookie[] cookies = request.getCookies();
+	 
+	 String saveId = null;
+	 
+	 // 쿠키가 있으면 ( null이 아니면 ) saveId에 아이디를 저장 -> 쿠키가 있으면 saveId가 null이 아님 
+	 
+	 if(cookies != null) {
+		 
+		 for(Cookie cookie : cookies) {
+			 
+			 if(cookie.getName().equals("saveId")) {
+				 
+				 saveId = cookie.getValue();
+				 break;
+			 }
+			 
+		 }
+		 
+	 }
 
 %>    
     
@@ -24,7 +42,6 @@
 <script src = "<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
 
 <!-- 이걸로 써도 되긴 됌 <script src = "/js/jquery-3.6.0.min.js"></script> -->
-
 <%-- 내가 잘못 쓴 코드 <script src ="<%=request.getContextPath() %>">js/jquery-3.6.0.min.js</script> --%>
 
 </head>
@@ -46,7 +63,7 @@
 						<table>
 						
 								<tr>
-									<td><input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요"></td>
+									<td><input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요" value=<%= saveId != null ? saveId : "" %>></td>
 								</tr>
 								
 								<tr>
@@ -56,7 +73,7 @@
 							
 								<tr>
 									<td colspan="2">
-										<input type="checkbox" name="saveId" id="saveId"><label for="saveId">아이디저장</label>
+										<input type="checkbox" name="saveId" id="saveId" <%=saveId != null ? "checked" : "" %>><label for="saveId">아이디저장</label>
 										<input type="button" value="회원가입" onclick="location.assign('<%=request.getContextPath()%>/enroll.do')">
 									</td>
 								</tr>
@@ -71,7 +88,11 @@
 					<table>
 					
 						<tr>
-							<td><%=login_member.getUserName()%></td>
+							<td><%=login_member.getUserName()%>님</td>
+						</tr>
+						
+						<tr>
+							<td><input type="button" value="내정보보기" onclick="<%=request.getContextPath()%>/mypage.do"></td>
 						</tr>
 						
 						<tr>

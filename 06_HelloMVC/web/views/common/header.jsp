@@ -157,7 +157,11 @@
 					<li class="notice"><a href="">공지사항</a></li>
 					<li class="board"><a href="">게시판</a></li>
 					
-				
+					<!-- 0506 --> 
+					
+					<% if(loginMember != null && loginMember.getMemberId().equals("admin")) { %>
+						<li class="admin-member"><a href="<%=request.getContextPath()%>/admin/memberlist.do">회원관리</a></li>
+					<% } %>
 				</ul>
 			
 			</nav>
