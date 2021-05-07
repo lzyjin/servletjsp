@@ -161,6 +161,7 @@
 					
 					<% if(loginMember != null && loginMember.getMemberId().equals("admin")) { %>
 						<li class="admin-member"><a href="<%=request.getContextPath()%>/admin/memberlist.do">회원관리</a></li>
+						<%-- <li class="admin-member"><a href="<%=request.getContextPath()%>/admin/memberlist.do?cPage=번호&numPerPage=번호">회원관리</a></li> 이렇게 할 수도 있는데 선생님은 다른 방법으로 했다 --%> 
 					<% } %>
 				</ul>
 			

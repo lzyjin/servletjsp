@@ -109,6 +109,8 @@ public class MemberDao {
 		
 	}
 
+	
+	
 	public int enroll(Connection conn, Member m) {
 		
 		int result = 0;
@@ -172,6 +174,14 @@ public class MemberDao {
 				m = new Member();
 				
 				m.setMemberId(rs.getString("userid"));
+				m.setPassword(rs.getString("password")); // 여기서부터 
+				m.setUserName(rs.getString("username"));
+				m.setGender(rs.getString("gender"));
+				m.setAge(rs.getInt("age"));
+				m.setEmail(rs.getString("email"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setHobby(rs.getString("hobby")); // 여기까지 안썼더니 회원정보불러오는 jsp에서 nullpointerexception 발생함..ㅎ 
 				
 			}
 			
@@ -190,6 +200,63 @@ public class MemberDao {
 		
 		
 		
+	}
+
+
+
+	public int updateMember(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		
+		int result = 0;
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectMemberId"));
+			
+			System.out.println(" dao m : " + m);
+			
+			pstmt.setString(1, m.getMemberId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) { // rs.next()의 반환은 boolean이니까 조건문에 쓸 수 있어
+				
+				pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
+				
+				pstmt.setString(1, m.getPassword());
+				pstmt.setString(2, m.getUserName());
+				pstmt.setString(3, m.getGender());
+				pstmt.setInt(4, m.getAge());
+				pstmt.setString(5, m.getEmail());
+				pstmt.setString(6, m.getPhone());
+				pstmt.setString(7, m.getAddress());
+				pstmt.setString(8, m.getHobby());
+				pstmt.setString(9, m.getMemberId());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		
+		} finally {
+			
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		
+		// 1. db에 이 회원이 있는지 pk인 id로 확인 
+		
+		
+		return result;
 	}
 
 	

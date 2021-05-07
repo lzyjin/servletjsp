@@ -12,13 +12,13 @@ import oracle.jdbc.proxy.annotation.Pre;
 
 public class MemberService {
 	
+	private MemberDao dao = new MemberDao();
+	
 	// conn 객체 생성 
 
 	public Member login(String id, String pw) {
 		
 		Connection conn = createConnection();
-		
-		MemberDao dao = new MemberDao();
 		
 		Member m = dao.login(conn, id, pw);
 		
@@ -32,10 +32,8 @@ public class MemberService {
 	public int enroll(Member m) {
 		
 		Connection conn = createConnection();
-		
-//		MemberDao dao = new MemberDao();
-		
-		int result = new MemberDao().enroll(conn, m);
+				
+		int result = dao.enroll(conn, m);
 		
 		if(result > 0) {
 			
@@ -57,17 +55,28 @@ public class MemberService {
 
 	public Member idCheck(String userId) {
 		
-		Connection conn = null;
-		
-		conn = createConnection();
-		
-		MemberDao mDao = new MemberDao();
-		Member m = mDao.idCheck(conn, userId);
+		Connection conn = createConnection();
+
+		Member m = dao.idCheck(conn, userId);
 		
 		close(conn);
 		
 		return m;
 		
+	}
+
+
+
+	public int updateMember(Member m) {
+		
+		Connection conn = createConnection();
+		
+		int result = dao.updateMember(conn, m);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
 	}
 	
 	

@@ -92,7 +92,7 @@
 						</tr>
 						
 						<tr>
-							<td><input type="button" value="내정보보기" onclick="<%=request.getContextPath()%>/mypage.do"></td>
+							<td><input type="button" value="내정보보기" onclick="location.assign('<%=request.getContextPath()%>/mypage.do?userId=<%=login_member.getMemberId()%>')"></td>
 						</tr>
 						
 						<tr>

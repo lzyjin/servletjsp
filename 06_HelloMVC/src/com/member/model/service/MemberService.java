@@ -12,16 +12,18 @@ import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
 
 public class MemberService {
-	
-	
-	
+
 	
 	
 	private MemberDao dao = new MemberDao();
 	
+	
+	
 	public MemberService() {
 		
 	}
+	
+	
 
 
 	public Member login(String userId, String password) {
@@ -46,6 +48,8 @@ public class MemberService {
 	}
 
 
+	
+	
 	public int insertMember(Member m) {
 		
 		Connection conn = getConnection();

@@ -68,7 +68,7 @@ public class MemberViewServlet extends HttpServlet {
 			// db에 일치하는 회원 있음 
 			
 			view = "/views/member/memberView.jsp";
-			
+			request.setAttribute("member", m);
 			
 		} else {
 			
@@ -80,7 +80,7 @@ public class MemberViewServlet extends HttpServlet {
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.setAttribute("member", m);
+//		request.setAttribute("member", m);
 		
 		
 		request.getRequestDispatcher(view).forward(request, response);
