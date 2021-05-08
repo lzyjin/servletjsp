@@ -13,7 +13,7 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
 
-@WebServlet("/enrollend.do")
+@WebServlet(name="enrollendservlet", urlPatterns="/enrollend.do")
 public class EnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

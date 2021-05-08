@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%
 	String msg = (String)request.getAttribute("msg");
-	/* String script = (String)request.getAttribute("script"); */
+
+	/* 선생님풀이 */
+	String script = (String)request.getAttribute("script");
 	
 %>
 
@@ -19,14 +21,14 @@
 	
 		alert("<%=msg%>"); // 문자열 변수를 출력하려면 ""반드시 필요
 		
-		<% if(msg.equals("비밀번호 변경 성공")) {  %>
+		<%-- <% if(msg.equals("비밀번호 변경 성공")) {  %>
 		
 			window.close();
 		
-		<% } %>
+		<% } %> --%>
 		
 		
-		<%-- 선생님풀이 <%= script != null ? script : ""%> --%>
+		/* 선생님풀이 */ <%= script != null ? script : ""%> 
 		
 		
 		

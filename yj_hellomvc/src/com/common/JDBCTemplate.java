@@ -1,4 +1,4 @@
-package com.member.common;
+package com.common;
 
 import java.io.FileReader;
 import java.io.IOException;

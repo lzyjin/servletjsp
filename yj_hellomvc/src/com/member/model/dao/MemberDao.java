@@ -1,5 +1,7 @@
 package com.member.model.dao;
 
+import static com.common.JDBCTemplate.*;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-import static com.member.common.JDBCTemplate.close;
 
 import com.member.model.vo.Member;
 
@@ -227,15 +227,25 @@ public class MemberDao {
 				
 				pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
 				
-				pstmt.setString(1, m.getPassword());
-				pstmt.setString(2, m.getUserName());
-				pstmt.setString(3, m.getGender());
-				pstmt.setInt(4, m.getAge());
-				pstmt.setString(5, m.getEmail());
-				pstmt.setString(6, m.getPhone());
-				pstmt.setString(7, m.getAddress());
-				pstmt.setString(8, m.getHobby());
-				pstmt.setString(9, m.getMemberId());
+//				pstmt.setString(1, m.getPassword());
+//				pstmt.setString(2, m.getUserName());
+//				pstmt.setString(3, m.getGender());
+//				pstmt.setInt(4, m.getAge());
+//				pstmt.setString(5, m.getEmail());
+//				pstmt.setString(6, m.getPhone());
+//				pstmt.setString(7, m.getAddress());
+//				pstmt.setString(8, m.getHobby());
+//				pstmt.setString(9, m.getMemberId());
+				
+//				pstmt.setString(1, m.getPassword());
+				pstmt.setString(1, m.getUserName());
+				pstmt.setString(2, m.getGender());
+				pstmt.setInt(3, m.getAge());
+				pstmt.setString(4, m.getEmail());
+				pstmt.setString(5, m.getPhone());
+				pstmt.setString(6, m.getAddress());
+				pstmt.setString(7, m.getHobby());
+				pstmt.setString(8, m.getMemberId());
 				
 				result = pstmt.executeUpdate();
 				
@@ -255,6 +265,68 @@ public class MemberDao {
 		
 		// 1. db에 이 회원이 있는지 pk인 id로 확인 
 		
+		
+		return result;
+	}
+
+
+
+	public int deleteMember(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("deleteMember"));
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+
+
+
+	public int updatePassword(Connection conn, String userId, String newPw) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		// updatePassword = UPDATE MEMBER SET PASSWORD = ? WHERE USERID = ?
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("updatePassword"));
+			
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
 		
 		return result;
 	}

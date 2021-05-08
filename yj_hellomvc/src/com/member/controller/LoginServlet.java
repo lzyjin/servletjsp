@@ -11,7 +11,7 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
 
-@WebServlet("/login.do")
+@WebServlet(name="loginservlet", urlPatterns ="/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,6 +25,8 @@ public class LoginServlet extends HttpServlet {
 		
 		String id = request.getParameter("userId");
 		String pw = request.getParameter("password");
+		
+		System.out.println("LoginServlet에서 pw : " + pw);
 		
 		MemberService service = new MemberService();
 		

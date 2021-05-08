@@ -1,6 +1,6 @@
 package com.member.model.service;
 
-import static com.member.common.JDBCTemplate.*;
+import static com.common.JDBCTemplate.*;
 
 import java.sql.*;
 import java.util.*;
@@ -75,6 +75,37 @@ public class MemberService {
 		
 		if(result > 0) commit(conn);
 		else rollback(conn);
+		
+		return result;
+	}
+
+
+
+	public int deleteMember(String userId) {
+		
+		Connection conn = createConnection();
+		
+		int result = dao.deleteMember(conn, userId);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+		
+		
+	}
+
+
+
+	public int updatePassword(String userId, String newPw) {
+		
+		Connection conn = createConnection();
+		
+		int result = dao.updatePassword(conn, userId, newPw);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
 		
 		return result;
 	}

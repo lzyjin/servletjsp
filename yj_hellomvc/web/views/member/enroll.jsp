@@ -175,7 +175,7 @@
 					const name = "idcheck_page";
 					const features = "width=300, height=300, left=500, top=100";
 					
-					window.open(url,name, features);
+					window.open(url, name, features);
 					
 					
 					

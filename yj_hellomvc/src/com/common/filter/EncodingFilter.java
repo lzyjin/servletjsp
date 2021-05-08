@@ -1,4 +1,4 @@
-package com.member.common;
+package com.common.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

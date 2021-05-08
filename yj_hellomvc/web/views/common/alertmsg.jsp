@@ -6,7 +6,7 @@
 
 	String msg = (String)request.getAttribute("msg");
 	String loc = (String) request.getAttribute("loc");
-	
+	String script = (String) request.getAttribute("script");
 	
 %>
 <!DOCTYPE html>
@@ -22,7 +22,8 @@
 	
 		alert("<%=msg%>");	
 		
-		<%-- location.assign("<%=loc%>"); --%>
+		// 비밀번호수정페이지에서 성공하면 창이 자동으로 닫기도록 
+		<%= script != null ? script : "" %>
 		
 		location.assign("<%=request.getContextPath()%><%=loc%>");
 	

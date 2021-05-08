@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.member.model.service.*;
-import com.member.model.vo.*;
-
 
 @WebServlet("/updatePassword.do")
 public class UpdatePasswordServlet extends HttpServlet {
@@ -23,32 +20,13 @@ public class UpdatePasswordServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 화면전환용 서블릿 
+		// 화면 연결용 서블릿 
 		
+		// String userId = request.getParameter("userId"); 쿼리스링으로 보낸 아아디값 ( 안써도 되는 코드 )  
 		
-		
-		
-//		String userId = request.getParameter("userId");
-//		
-//		Member m = new MemberService().checkDuplicateId(userId);
-//		
-//		if(m != null) {
-//			
-//			request.setAttribute("result", m);
-//			// m이 null이 아니면 있는 회원, null이면 없는 회원 
-//		}
-//		
-//		request.setAttribute("userIds", userId);
-//
-//		request.getRequestDispatcher("/views/member/updatePassword.jsp").forward(request, response);
-//		
-		
-		
-		// 선생님 풀이 
+		// updatePassword.jsp 에서 request.getParameter("userId")로 userId를 쓸 수 있다 
 		
 		request.getRequestDispatcher("/views/member/updatePassword.jsp").forward(request, response);
-		
-		
 	}
 
 	

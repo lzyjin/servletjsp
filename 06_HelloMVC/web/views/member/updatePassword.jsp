@@ -69,7 +69,7 @@ System.out.println("is this error? "+result);
 			</table>
 			
 			<!-- 선생님 풀이 ) 비밀번호 변경 기능 만들면서 필요해서 추가한 태그  -->
-			<%-- <input type="hidden" name="userId" value="<%=request.getParameter("userId")%>"> --%>
+			<input type="hidden" name="userId" value="<%=request.getParameter("userId")%>">
 			
 		</form>
 		
@@ -81,7 +81,9 @@ System.out.println("is this error? "+result);
 	
 	<script>
 
+	/*
 		const fn_check = () => {
+			
 			$(function() {
 				
 				// 비밀번호 확인 	
@@ -98,7 +100,7 @@ System.out.println("is this error? "+result);
 				
 				} );
 				
-			}
+			} */
 		
 			// 기존 비밀번호가 맞는지 확인 
 		
@@ -125,19 +127,12 @@ System.out.println("is this error? "+result);
 				 
 				/*  현재 비밀번호입력폼과 DB와 확인 */
 			
-		}
-			
-		<%-- 
-		
-		
-			
-		})
-		 --%>
+	//	} 
 		
 		
 		
 		// 선생님 풀이
-		/* 
+		
 		const pwck=document.getElementById("password_chk");
 		
 		pwck.addEventListener("blur",(e)=>{
@@ -151,7 +146,7 @@ System.out.println("is this error? "+result);
 				document.getElementById("password_new").focus();
 			}
 		});
-		*/
+		
 		
 		
 		

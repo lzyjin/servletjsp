@@ -25,9 +25,7 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-		 
-		 
+		/*
 		String oldPw = request.getParameter("password");
 		String newPw = request.getParameter("password_new");
 	
@@ -69,10 +67,10 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		*/
 		
 		
 		
-		/*
 		// 선생님 풀이
 		
 		String userId = request.getParameter("userId");
@@ -110,7 +108,7 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		request.setAttribute("script", script);
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		*/
+		
 		
 	}
 

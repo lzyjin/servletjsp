@@ -202,21 +202,15 @@
 				/* loginMember 변수 사용 가능한 이유 : header에서 선언했기 때문에 include한 이 jsp에서도 사용 가능하다 */
 				/* id만 필요하고 굳이 form을 넘길 필요가 없어서 이렇게 한다 */
 				
-			} else {
-				
-				// 탈퇴 취소 
-			}
+			
 		}
 		
 		
 		
 		
 		const fn_password_update = () => {
-			
-			
 				
-				
-			
+				<%--
 				const url = "<%=request.getContextPath()%>/updatePassword.do?userId=" + "<%=loginMember.getMemberId()%>";
 				
 				const name = "updatePasswordPage";
@@ -240,16 +234,16 @@
 				updatePassword.target = name;
 				
 				updatePassword.submit();
-				
+				--%>
 				
 				
 				// 선생님 풀이 
-				<%-- const url = "<%=request.getContextPath()%>/updatePassword.do?userId=<%=m.getMemberId()%>";
+				const url = "<%=request.getContextPath()%>/updatePassword.do?userId=<%=m.getMemberId()%>";
 				
 				const name = "updatePasswordPage";
 				const spec = "width=400, height=210, left=500, top=200";
 				
-				window.open(url,"_blank", name, spec); --%>
+				window.open(url,"_blank", name, spec);
 		}
 		
 	</script>	

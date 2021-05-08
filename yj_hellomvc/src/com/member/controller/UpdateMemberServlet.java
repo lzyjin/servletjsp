@@ -11,7 +11,7 @@ import com.member.model.service.*;
 import com.member.model.vo.*;
 
 
-@WebServlet("/updateMember.do")
+@WebServlet(name="updatememberervlet", urlPatterns ="/updateMember.do")
 public class UpdateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		// 여기에서 인코딩처리하는 대신 인코딩하는 filter 생성 
 		
 		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
+//		String password = request.getParameter("password"); 비밀번호변경기능을 따로 만들어서 주석처리함
 		String userName = request.getParameter("userName");
 		int age = Integer.parseInt(request.getParameter("age"));
 		String email = request.getParameter("email");
@@ -35,7 +35,8 @@ public class UpdateMemberServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String hobby = String.join(",", request.getParameterValues("hobby"));
 		
-		Member m = new Member(userId, password, userName, gender, age, email, phone, address, hobby, null);
+//		Member m = new Member(userId, password, userName, gender, age, email, phone, address, hobby, null);
+		Member m = new Member(userId, "", userName, gender, age, email, phone, address, hobby, null);
 		
 		int result = new MemberService().updateMember(m);
 		
