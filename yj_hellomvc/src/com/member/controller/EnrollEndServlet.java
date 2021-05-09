@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.*;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
@@ -25,8 +26,8 @@ public class EnrollEndServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
+//		response.setCharacterEncoding("utf-8");
 		
 		// 사용자가 회원가입창에 입력한 값 가져오기 
 		
@@ -34,8 +35,23 @@ public class EnrollEndServlet extends HttpServlet {
 				String password = request.getParameter("password_");
 				String userName = request.getParameter("userName");
 				int age = Integer.parseInt(request.getParameter("age"));
+				
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
+				
+				try {
+					
+					// 0506
+					// 암호화 처리 
+					email = AESCryptor.encrypt(email);
+					phone = AESCryptor.encrypt(phone);
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				} 
+				
+				
 				String address = request.getParameter("address");
 				String gender = request.getParameter("gender");
 				String[] hobbys = request.getParameterValues("hobby");

@@ -5,6 +5,8 @@
 <%
 	Member m = (Member)request.getAttribute("member");
 %>
+
+
 	<section id=enroll-container>
 	
 		<h2>회원 정보 수정</h2>

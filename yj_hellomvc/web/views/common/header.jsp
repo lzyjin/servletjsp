@@ -117,6 +117,12 @@
 					<li class="home"><a href="">home</a></li>
 					<li class="notice"><a href="">공지사항</a></li>
 					<li class="board"><a href="">게시판</a></li>
+					
+					<% if(login_member != null && login_member.getMemberId().equals("admin")) { %>
+					
+						<li class="admin-memberlist"><a href="<%=request.getContextPath()%>/admin/memberlist.do">회원관리</a></li>
+				
+					<% } %>
 				
 				</ul>
 			

@@ -7,29 +7,17 @@ import java.util.*;
 
 import javax.crypto.*;
 
-// 양방향 암호화를 지원하는 클래스
-// 양방향 암호화 처리 클래스는 기본 java api에서 제공하고 있다. 
-// javax.crypto 패키지, java.security 패키지에 구성되어 있다. 
-
-// key 관리가 중요하다 !
-// key는 프로젝트에서 한개만 있어야 한다 = ignore 처리 필요 ( git에 올릴 필요 없다 ) 
-
+// 양방향 암호화 
 public class AESCryptor {
+	
+	private static SecretKey key;
+	
+	// 서버를 올렸다내려도 고대로 있어야하므로 암호화키를 파일로 저장한다 
+	
+	private String path; // 암호화키가 저장된 파일의 경로
+	
+	
 
-	
-	
-	private static SecretKey key; // 암호화, 복호화를 위한 키 객체 
-	
-	// private static 는 Singletone 객체 ( 함부로 수정되면 안되니까 ) 
-	
-	
-	
-	private String path;  // 파일로 저장된 암호화키의 위치(경로)
-	
-	// key를 파일로 저장해서 영원히 저장해놓을것임 
-	// 서버를 껐다 켜도 자동으로 로드될 수 있게 
-	
-	
 	// 기본생성자
 	public AESCryptor() {
 		
@@ -101,7 +89,7 @@ public class AESCryptor {
 	private void getGenerator() {
 		
 		
-		SecureRandom ser = new SecureRandom(); // key값이 중복되지 않도록, 확실한 랜덤key를 생성하기 위해 사용 
+		SecureRandom ser = new SecureRandom(); // key값이 중복되지 않도록, 확실한 key를 생성하기 위해 사용 
 		// salt 값이라고 부른대 
 		
 		// KeyGenerator : Key를 생성하는 클래스 
@@ -186,7 +174,7 @@ public class AESCryptor {
 	}
 	
 	
-		// 복호화 처리 메소드  ( encryptedStr : 암호화된 Str이다 라는 뜻 ) 
+		// 복호화 처리 메소드  ( 매개변수 : 암호화된 Str이다 라는 뜻 ) 
 		public static String decrypt(String encryptedStr ) throws NoSuchAlgorithmException, NoSuchPaddingException, 
 												InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
 			
@@ -211,4 +199,7 @@ public class AESCryptor {
 	
 	
 	
+	
+	
+
 }

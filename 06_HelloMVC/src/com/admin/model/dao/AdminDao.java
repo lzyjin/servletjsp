@@ -46,8 +46,16 @@ public class AdminDao {
 			// 0507 페이징처리부분 추가한 코드 
 //			pstmt.setInt(1, 1);
 //			pstmt.setInt(2, 5);
+			
 //			pstmt.setInt(1, 6);
 //			pstmt.setInt(2, 10);
+			
+			// 데이터의 구역 설정 
+			// cPage : 1, numPerPage : 5 라면 -> 시작데이터 : 1, 끝데이터 5
+			// cPage : 2, numPerPage : 5 라면 -> 시작데이터 : 6, 끝데이터 10 
+			// cPage : 3, numPerPage : 5 라면 -> 시작데이터 : 11, 끝데이터 15 
+			
+			
 			pstmt.setInt( 1, ( cPage - 1 ) * numPerPage + 1 );
 			pstmt.setInt( 2, cPage * numPerPage);
 			
@@ -86,6 +94,8 @@ public class AdminDao {
 		return list;
 	}
 
+	
+	
 	public int countMember(Connection conn) {
 		
 		PreparedStatement pstmt = null;
@@ -103,7 +113,7 @@ public class AdminDao {
 			while(rs.next()) {
 				
 				// 알아두기
-				countMember = rs.getInt(1);
+				countMember = rs.getInt(1); // 1은 컬럼인덱스번호 
 				// 또는 count(*)에 별칭부여해서 그걸 사용해도 됌 
 				
 			}
@@ -122,7 +132,10 @@ public class AdminDao {
 
 	
 	
-	public List<Member> searchMember(Connection conn, String searchType, String keyword) {
+	
+	
+//	public List<Member> searchMember(Connection conn, String searchType, String keyword) {
+	public List<Member> searchMember(Connection conn, String searchType, String keyword, int cPage, int numPerPage) {
 		
 		PreparedStatement pstmt = null;
 		
@@ -131,27 +144,22 @@ public class AdminDao {
 //		String sql = "";
 		String sql = prop.getProperty("searchMember");
 		
-		List<Member> list = new ArrayList();
 		
-		switch (searchType) {
-//			case "userId":
-//				sql = "searchMemberId";
-//			break;
-//			case "userName":
-//				sql = "searchMemberUserName";
-//			break;
-//			case "gender":
-//				sql = "searchMemberGender";
-//			break;
-		}
+		
+		List<Member> list = new ArrayList();
 		
 		try {
 			
 //			pstmt = conn.prepareStatement(prop.getProperty(sql));
 			pstmt = conn.prepareStatement(sql.replace("@", searchType));
 			
+			// 1 : 검색키워드,  2: 시작데이터번호, 3: 끝데이터번호
+			
 //			pstmt.setString(1, keyword);
 			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
 			
 			rs = pstmt.executeQuery();
 			

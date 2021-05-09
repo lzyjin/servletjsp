@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.common.*;
 import com.member.model.service.*;
 import com.member.model.vo.*;
 
@@ -27,6 +28,19 @@ public class MypageServlet extends HttpServlet {
 		Member m = new MemberService().idCheck(userId); // 아이디로 검색하는 로직이라서 이 메소드 사용 
 					System.out.println("MypageServlet 에서 m : " + m);
 		
+					
+					// 암호화된 이메일과 주소를 복호화 ( 암호화되어있던것을 원본값으로 ) 
+					try {
+						
+						m.setPhone(AESCryptor.decrypt(m.getPhone()));
+						m.setEmail(AESCryptor.decrypt(m.getEmail()));
+						
+					} catch (Exception e) {
+						
+						// e.printStackTrace();
+						// 주석처리해서 암호화처리하지 않은 계정으로 로그인했을때 뜨는 예외를 보여주지 않게 
+					}
+					
 		
 		String view = "";
 		String msg = "";

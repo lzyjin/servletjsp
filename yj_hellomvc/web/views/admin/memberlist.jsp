@@ -1,7 +1,6 @@
-<%@page import="com.common.AESCryptor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member, java.util.*, com.common.*" %>
+<%@ page import = "java.util.*" %>
 
 <%@ include file="/views/common/header.jsp" %>
 
@@ -9,8 +8,9 @@
 	List<Member> memberlist = (List<Member>)request.getAttribute("memberlist");
 %>
 
-<style type="text/css">
+	<style type="text/css">
 	
+			
 	    section#memberList-container {
 	    	text-align:center;
 	    }
@@ -52,13 +52,12 @@
 	    form#numperPageFrm{
 	    	display:inline;
 	    }
-	    
-</style>
+    </style>
     
     <section id="memberList-container">
-    
         <h2>회원관리</h2>
         
+         
         <div id="search-container">
         
         	검색타입 :
@@ -95,48 +94,9 @@
         	
         </div>
         
-        
-        <div id="numPerPage-container">
-        	페이지 당 회원 수 :
-        	<form id="" name="" action="" method="">
-        		<select name="numPerPage" id="numPerPage">
-        			<option value="10">10</option>
-        			<option value="5">5</option>
-        			<option value="3">3</option>
-        		</select>
-        	</form>
-        
-        </div>
-        
-        
         <script>
         
-       /*  $("#searchType").change( (e) => {
-        	
-        	if( $("#searchType").val() == "userID" ) {
-        	
-	        	$("#search-userId").css("display", "inline-block");
-	        	$("#search-userName").css("display", "none");
-	        	$("#search-gender").css("display", "none");
-        	
-        	} else if( $("#searchType").val() == "userName") {
-        		
-        		$("#search-userId").css("display", "none");
-	        	$("#search-userName").css("display", "inline-block");
-	        	$("#search-gender").css("display", "none");
-	        	
-        	} else if( $("#searchType").val() == "gender") {
-        		
-        		$("#search-userId").css("display", "none");
-	        	$("#earch-userName").css("display", "none");
-	        	$("#search-gender").css("display", "inline-block");
-        	}
-        	
-        } ); 
-         */
-        
-        
-        // 선생님 풀이
+          // 선생님 풀이
         
         $("#searchType").change( (e) => {
         	
@@ -144,7 +104,7 @@
         	const userName = $("#search-userName");
         	const gender = $("#search-gender");
         	
-        	const value = $(e.target).val();
+        	const value = $(e.target).val(); 
         	
         	// $(e.target).val() 은 select태그의 value값은 option태그의 value가 되므로 
         	
@@ -160,12 +120,24 @@
         </script>
         
         
+        <div id="numPerPage-container">
+        	페이지 당 회원 수 :
+        	<form id="" name="" action="" method="">
+        		<select name="numPerPage" id="numPerPage">
+        			<option value="10">10</option>
+        			<option value="5">5</option>
+        			<option value="3">3</option>
+        		</select>
+        	</form>
+        
+        </div>
+        
+        
         
         <table id="tbl-member">
             <thead>
-            
-            <tr>
-                    <th>아이디</th>
+                <tr>
+		            <th>아이디</th>
 				    <th>이름</th>
 				    <th>성별</th>
 				    <th>나이</th>
@@ -174,54 +146,44 @@
 				    <th>주소</th>
 				    <th>취미</th>
 				    <th>가입날짜</th>
-             </tr>
-            
-            
-           <%--  <% if(memberlist != null) { %> --%>
-            <% if( !memberlist.isEmpty() ) { %>
-            
-           		<% for(Member m : memberlist)  { %>
-            
-            
-                <tr>
-                   
-				    <td><%=m.getMemberId() %></td>
-				    <td><%=m.getUserName() %></td>
-				    <td><%=m.getGender() %></td>
-				    <td><%=m.getAge() %></td>
-				  	<td><%=m.getEmail() %></td> 
-				    <td><%=m.getPhone() %></td> 
-				    <td><%=m.getAddress() %></td>
-				    <td><%=m.getHobby() %></td>
-				    <td><%=String.valueOf(m.getEnrollDate()) %></td>
                 </tr>
+                
+                <% if(!memberlist.isEmpty()) { %>
+	                
+	           		<% for(Member m : memberlist) { %>
+	            
+		                <tr>
+				            <td><%=m.getMemberId() %></td>
+						    <td><%=m.getUserName() %></td>
+						    <td><%=m.getGender()%></td>
+						    <td><%=m.getAge() %></td>
+						    <td><%=m.getEmail() %></td>
+						    <td><%=m.getPhone() %></td>
+						    <td><%=m.getAddress()%></td>
+						    <td><%=m.getHobby() %></td>
+						    <td><%=m.getEnrollDate()%></td>
+		                </tr>
+                
+                	<% } %>
+                
+                <% } else { %>
+                
+                	<tr>
+                		<td>결과가 없습니다</td>
+                	</tr>
                 
                 <% } %>
                 
-            <% } else { %>
-            
-            	<tr>
-            		<td colspan="9" align="center">검색결과가 없습니다</td>
-            	</tr>
-            
-            <% } %>
-            
             </thead>
             <tbody>
-            
-		       	 <!--  조회된 결과가 없으면 한줄(row)로 결과가 없습니다 출력하고
-			    조회된 결과가 있으면 각 객체를 tr로 출력하는 구문을 작성할것 -->
+       	    <!-- 조회된 결과가 없으면 한줄(row)로 결과가 없습니다 출력하고
+	    조회된 결과가 있으면 각 객체를 tr로 출력하는 구문을 작성할것 -->
             </tbody>
-            
         </table>
-        
-        
-        <!-- 0507 -->
         
         <div id="pageBar">
         	<%=request.getAttribute("pageBar") %>
         </div>
-        
         
     </section>
 

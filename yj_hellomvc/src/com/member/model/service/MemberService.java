@@ -5,6 +5,7 @@ import static com.common.JDBCTemplate.*;
 import java.sql.*;
 import java.util.*;
 
+import com.admin.controller.*;
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
 
@@ -30,6 +31,8 @@ public class MemberService {
 	
 
 	public int enroll(Member m) {
+		
+		System.out.println("service m : " + m);
 		
 		Connection conn = createConnection();
 				
@@ -109,6 +112,9 @@ public class MemberService {
 		
 		return result;
 	}
+
+
+
 	
 	
 

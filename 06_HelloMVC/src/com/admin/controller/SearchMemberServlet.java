@@ -31,16 +31,115 @@ public class SearchMemberServlet extends HttpServlet {
 		
 		// 클라이언트가 보낸 값 가져오기
 		String searchType = request.getParameter("searchType");
-		String keyword = request.getParameter("searchKeyword");
+		String searchKeyword = request.getParameter("searchKeyword");
 		
-		List<Member> result = new AdminService().searchMember(searchType, keyword);
+		System.out.println("searchType : " + searchType);
+		System.out.println("keyword : " + searchKeyword);
 		
-//		request.setAttribute("members", result);
+		// 숙제 1 
+		// 관리자의 회원관리 게시판에서  조회결과를 페이징처리하기 
 		
+		int cPage;
+		
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
+		}
+		
+		
+		int numPerPage;
+		
+		try {
+			numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
+		} catch (NumberFormatException e) {
+			numPerPage = 5;
+		}
+		
+		int totalData = new AdminService().countMember();
+		
+		int totalPage = (int) Math.ceil((double)totalData / numPerPage);
+		
+		
+		int pageBarSize = 4;
+		
+		int pageNo =  ( ( cPage - 1 ) / pageBarSize ) * pageBarSize + 1 ;
+		
+		int pageEnd = pageNo + pageBarSize - 1;
+		
+		
+		
+//		List<Member> result = new AdminService().searchMember(searchType, searchKeyword);
+		List<Member> result = new AdminService().searchMember(searchType, searchKeyword, cPage, numPerPage);
+
+		
+		
+		
+		String pageBar = "";
+		
+		// [이전]버튼 
+		if(pageNo == 1) {
+			
+			pageBar += "<span> [이전] </span>";
+			
+		} else {
+			
+			pageBar += "<a href='" + request.getContextPath() 
+					+ "/admin/searchMember.do?cPage=" + (pageNo-1) 
+					+ "&numPerPage=" + numPerPage 
+					+ "&searchType=" + searchType 
+					+ "&searchKeyword=" + searchKeyword 
+					+ "'> [이전] </a>";
+			
+		}
+		
+		// 페이지번호 
+		while(pageNo <= pageEnd && pageNo <= totalPage) {
+			
+			if(pageNo == cPage) {
+				
+				pageBar += "<span> "+ pageNo +" </span>";
+				
+			} else {
+				
+				pageBar += "<a href='" + request.getContextPath() 
+				+ "/admin/searchMember.do?cPage=" + pageNo 
+				+ "&numPerPage=" + numPerPage 
+				+ "&searchType=" + searchType 
+				+ "&searchKeyword=" + searchKeyword 
+				+ "'> " + pageNo + " </a>";
+				
+			}
+			
+			pageNo++;
+			
+		}
+		
+		
+		// [다음]버튼
+		if(pageNo > totalPage) {
+			
+			pageBar += "<span> [다음] </span>";
+			
+		} else {
+			
+			pageBar += "<a href='" + request.getContextPath() 
+			+ "/admin/searchMember.do?cPage=" + pageNo 
+			+ "&numPerPage=" + numPerPage 
+			+ "&searchType=" + searchType 
+			+ "&searchKeyword=" + searchKeyword 
+			+ "'> " + "[다음]" + " </a>";
+			
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		
+		
+		
+	
 		
 		
 		for(Member m : result) {
-			
 			try {
 				
 				m.setPhone(AESCryptor.decrypt(m.getPhone()));
@@ -49,7 +148,6 @@ public class SearchMemberServlet extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-			
 			
 		}
 		
