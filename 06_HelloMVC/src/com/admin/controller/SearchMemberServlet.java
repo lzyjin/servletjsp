@@ -33,8 +33,14 @@ public class SearchMemberServlet extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
 		
-		System.out.println("searchType : " + searchType);
-		System.out.println("keyword : " + searchKeyword);
+		// String numPerPage = request.getParameter("numPerPage");
+		
+		
+		
+		System.out.println("SearchMemberServlet에서 테스트 searchType : " + searchType);
+		System.out.println("SearchMemberServlet에서 테스트 searchKeyword : " + searchKeyword);
+		
+		
 		
 		// 숙제 1 
 		// 관리자의 회원관리 게시판에서  조회결과를 페이징처리하기 
@@ -52,11 +58,15 @@ public class SearchMemberServlet extends HttpServlet {
 		
 		try {
 			numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
+			System.out.println("SearchMemberServlet에서 테스트 numPerPage : " + numPerPage);
 		} catch (NumberFormatException e) {
-			numPerPage = 5;
+			numPerPage = 10;
 		}
 		
-		int totalData = new AdminService().countMember();
+//		int totalData = new AdminService().countMember();
+		int totalData = new AdminService().countSearchMember(searchType, searchKeyword);
+		
+		System.out.println("SearchMemberServlet에서 테스트 totalData : " + totalData);
 		
 		int totalPage = (int) Math.ceil((double)totalData / numPerPage);
 		
@@ -134,8 +144,8 @@ public class SearchMemberServlet extends HttpServlet {
 		
 		request.setAttribute("pageBar", pageBar);
 		
-		
-		
+		request.setAttribute("numPerPage", numPerPage);
+		request.setAttribute("cPage", cPage);
 	
 		
 		

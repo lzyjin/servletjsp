@@ -55,7 +55,18 @@ public class AdminService {
 		return countMember;
 	}
 
-
+	
+	public int countSearchMember(String searchType, String keyword) {
+		
+		Connection conn = getConnection();
+		
+		int countMember = dao.countSearchMember(conn, searchType, keyword);
+		
+		close(conn);
+		
+		return countMember;
+	}
+	
 
 
 
@@ -71,7 +82,7 @@ public class AdminService {
 		
 		return list;
 	}
-	
+
 	
 	
 

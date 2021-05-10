@@ -72,7 +72,7 @@ public class MemberListServlet extends HttpServlet {
 				try {
 					
 					cPage = Integer.parseInt(request.getParameter("cPage")); // java.lang.NumberFormatException: null
-				
+					
 				} catch (NumberFormatException e) {
 					
 					cPage = 1; // 디폴트로 설정한 현재페이지
@@ -88,10 +88,10 @@ public class MemberListServlet extends HttpServlet {
 				try {
 					
 					numPerPage = Integer.parseInt(request.getParameter("numPerPage")); // java.lang.NumberFormatException: null
-				
+					
 				} catch (NumberFormatException e) {
 					
-					numPerPage = 5; // 디폴트로 설정한 페이지당 데이터의 수 
+					numPerPage = 10; // 디폴트로 설정한 페이지당 데이터의 수 
 				}
 			
 			// 예외를 발생하지 않게 하기 위해서는 header에서 cPage와 numPerPage를 정해서 요청받거나
@@ -247,7 +247,7 @@ public class MemberListServlet extends HttpServlet {
 				
 				pageBar += "<a href = '" + request.getContextPath() 
 				+ "/admin/memberlist.do?cPage=" +pageNo 
-				+ "&numPerPage" + numPerPage + "'>[다음]</a>";
+				+ "&numPerPage=" + numPerPage + "'>[다음]</a>";
 			}
 			
 			
@@ -257,8 +257,8 @@ public class MemberListServlet extends HttpServlet {
 			
 			request.setAttribute("pageBar", pageBar);
 			
-			
-			
+			request.setAttribute("numPerPage", numPerPage);
+			request.setAttribute("cPage", cPage);
 			
 			
 					

@@ -96,6 +96,8 @@ public class AdminDao {
 
 	
 	
+	
+	
 	public int countMember(Connection conn) {
 		
 		PreparedStatement pstmt = null;
@@ -130,6 +132,52 @@ public class AdminDao {
 		return countMember;
 	}
 
+	
+	
+	
+	
+	
+	
+	public int countSearchMember(Connection conn, String searchType, String keyword) {
+
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		
+		int countMember = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("countSearchMember").replace("@", searchType));
+			
+			pstmt.setString(1, "%"+keyword+"%");
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				// 알아두기
+				countMember = rs.getInt(1); // 1은 컬럼인덱스번호 
+				// 또는 count(*)에 별칭부여해서 그걸 사용해도 됌 
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return countMember;
+		
+	}
+	
+	
+	
 	
 	
 	
@@ -194,5 +242,7 @@ public class AdminDao {
 		
 		return list;
 	}
+
+	
 
 }
