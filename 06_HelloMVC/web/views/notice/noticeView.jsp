@@ -31,7 +31,11 @@
 	            <td>
 	            	<!-- 있으면 이미지출력하기 없으면 공란  -->
 	            	<% if(n.getFilePath() != null) { %>
-	            		<img src="<%=request.getContextPath() %>/images/file.png" width="16px" height="16px">
+	            		
+	            		<%-- <img src="<%=request.getContextPath() %>/images/file.png" width="16px" height="16px"> --%>
+	            		
+	            		<a href="<%=request.getContextPath()%>/notice/notice/fileDownload.do?fname=<%=n.getFilePath()%>"><img src="<%=request.getContextPath() %>/images/file.png" width="16px" height="16px"></a>
+	                	
 	            	<% } %>
 	            </td>
 	        </tr>
@@ -40,13 +44,13 @@
 	            <td><%=n.getNoticeContent() %></td>
 	        </tr>
 	        <tr>
-	        	<!-- 숙제 : 사용자는 수정 삭제 안되게 하고, 관리자는 가능하게 --> 
+	        	<!-- 사용자는 수정 삭제 안되게 하고, 관리자는 가능하게 --> 
 	        	
 	        	 <% if(loginMember != null && loginMember.getMemberId().equals("admin")) { %>
 	            
 	           		<th colspan="2">
 	           
-		                <input type="button" value="수정하기" onclick="">
+		                <input type="button" value="수정하기" onclick="location.assign('<%=request.getContextPath()%>/notice/noticeUpdate.do?no=<%=n.getNoticeNo()%>')">
 		                <input type="button" value="삭제하기" onclick="">
 	                
 	                </th>

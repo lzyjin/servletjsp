@@ -6,6 +6,9 @@ import java.util.*;
 import com.notice.model.dao.*;
 import com.notice.model.vo.*;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.rollback;
 
 public class NoticeService {
 	
@@ -40,6 +43,45 @@ public class NoticeService {
 		
 		return n;
 		
+	}
+
+	public int writeNotice(Notice n) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.writeNotice(conn, n);
+		
+		
+		if(result > 0) {
+			
+			commit(conn);
+		} else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int noticeUpdate(Notice n) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.noticeUpdate(conn, n);
+		
+		if(result > 0) {
+			
+			commit(conn);
+		} else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

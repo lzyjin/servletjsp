@@ -86,7 +86,7 @@ public class NoticeServlet extends HttpServlet {
 			pageBar += "<span> [이전] </span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() 
-					+ "/noticeList.do?cPage=" + ( pageNo -1 )
+					+ "/notice/noticeList.do?cPage=" + ( pageNo -1 )
 					+ "&numPerPage=" + numPerPage + "'> [이전] </a>";
 		}
 		
@@ -97,7 +97,7 @@ public class NoticeServlet extends HttpServlet {
 				pageBar += "<span>" + pageNo + "</span>";
 			} else {
 				pageBar += "<a href='" + request.getContextPath() 
-				+ "/noticeList.do?cPage=" + pageNo
+				+ "/notice/noticeList.do?cPage=" + pageNo
 				+ "&numPerPage=" + numPerPage + "'> " 
 				+ pageNo +" </a>";
 			}
@@ -109,7 +109,7 @@ public class NoticeServlet extends HttpServlet {
 			pageBar += "<span> [다음] </span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() 
-					+ "/noticeList.do?cPage=" + pageNo
+					+ "/notice/noticeList.do?cPage=" + pageNo
 					+ "&numPerPage=" + numPerPage + "'> [다음] </a>";
 		}
 		
