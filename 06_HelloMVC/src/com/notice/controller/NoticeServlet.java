@@ -72,7 +72,7 @@ public class NoticeServlet extends HttpServlet {
 		
 		int pageNo = ((cPage -1)/pageBarSize)*pageBarSize+1;
 		
-		int pageEnd = cPage*pageBarSize;
+		int pageEnd = pageNo + pageBarSize -1;
 		
 		
 		List<Notice> list = service.searchAllNotice(cPage, numPerPage);
