@@ -42,30 +42,25 @@ public class BoardInsertServlet extends HttpServlet {
 			return;
 		}
 		
+		
+		
 		String filePath = request.getServletContext().getRealPath("/upload/board");
 		
 		int maxPostSize = 1024*1024*100;
 		
 		String encode = "utf-8";
 		
+		
+		
 //		MultipartRequest mr = new MultipartRequest(request, filePath, maxPostSize, encode, new DefaultFileRenamePolicy());
 		MultipartRequest mr = new MultipartRequest(request, filePath, maxPostSize, encode, new MyRename());
 		
-//		
-//		String boardTitle = request.getParameter("boardTitle");
-//		
-//		String boardWriter = request.getParameter("boardWriter");
-//		
-//		String up_file = request.getParameter("up_file");
-//		
-//		String content = request.getParameter("content");
-//		
 		
+
 		Board b = new Board();
 		
-//		b.setBoardTitle(boardTitle);
-//		b.setBoardWriter(boardWriter);
-//		b.setBoardContent(content);
+
+		
 		b.setBoardTitle(mr.getParameter("boardTitle"));
 		b.setBoardWriter(mr.getParameter("boardWriter"));
 		b.setBoardContent(mr.getParameter("content"));
@@ -75,9 +70,13 @@ public class BoardInsertServlet extends HttpServlet {
 		
 				System.out.println("BoardInsertServlet에서 테스트, b : " + b);
 		
+				
 		BoardService service = new BoardService();
 		
+		
+		// db에 데이터 삽입 
 		int result = service.insertBoard(b);
+		
 		
 		String msg = "";
 		String loc = "";
@@ -94,8 +93,12 @@ public class BoardInsertServlet extends HttpServlet {
 			loc = "/views/board/boardForm.jsp";
 		}
 		
+		
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
+		
+		
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		

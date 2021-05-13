@@ -1,6 +1,8 @@
 package com.board.controller;
 
 import java.io.IOException;
+import java.util.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -88,10 +90,17 @@ public class BoardViewServlet extends HttpServlet {
 //		Board b = service.boardView(boardNo);
 		Board b = service.boardView(boardNo, readFlag);
 		
-		
-
-		
 		request.setAttribute("board", b);
+		
+		
+		// 댓글도 가져와서 boardView.jsp에 넘겨줘야함 
+		// 댓글은 0개 이상 ( 변수를 최대값으로 선언해야함 )
+		// 어느 게시글의 댓글인지 알아야하니까 boardNo을 매개변수로 넘겨야함 
+		List<BoardComment> comments = service.selectBoardComment(boardNo); // 페이징처리필요하다면 cPage, numPerPage까지 넘겨야함 
+		
+		request.setAttribute("comments", comments);
+		
+		
 		
 		request.getRequestDispatcher("/views/board/boardView.jsp").forward(request, response);
 	}

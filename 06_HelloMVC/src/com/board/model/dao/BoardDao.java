@@ -243,4 +243,93 @@ public class BoardDao {
 		return result;
 	}
 
+
+
+
+
+
+	// 댓글 달기
+	public int insertBoardComment(Connection conn, BoardComment bc) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertBoardComment"));
+			
+			pstmt.setInt(1, bc.getBoardCommentLevel());
+			pstmt.setString(2, bc.getBoardCommentWriter());
+			pstmt.setString(3, bc.getBoardCommentContent());
+			pstmt.setInt(4, bc.getBoardRef());
+			
+//			pstmt.setInt(5, bc.getBoardCommentRef());
+//			pstmt.setInt( 5, bc.getBoardCommentRef() == 0 ? null : bc.getBoardCommentRef() ); int형은 null값을 저장할 수 없음 
+			pstmt.setString( 5, bc.getBoardCommentRef() == 0 ? null : String.valueOf(bc.getBoardCommentRef()) );
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
+
+
+
+	public List<BoardComment> selectBoardComment(Connection conn, int boardRef) {
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		
+		List<BoardComment> comments = new ArrayList<BoardComment>();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectBoardComment"));
+			
+			pstmt.setInt(1, boardRef);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				BoardComment bc = new BoardComment();
+				
+				bc.setBoardCommentContent(rs.getString("BOARD_COMMENT_CONTENT"));
+				bc.setBoardCommentDate(rs.getDate("BOARD_COMMENT_DATE"));
+				bc.setBoardCommentLevel(rs.getInt("BOARD_COMMENT_LEVEL"));
+				bc.setBoardCommentNo(rs.getInt("BOARD_COMMENT_NO"));
+				bc.setBoardCommentRef(rs.getInt("BOARD_COMMENT_REF"));
+				bc.setBoardCommentWriter(rs.getString("BOARD_COMMENT_WRITER"));
+				bc.setBoardRef(rs.getInt("BOARD_REF"));
+				
+				comments.add(bc);
+			}
+			
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return comments;
+	}
+
 }

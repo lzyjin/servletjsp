@@ -1,0 +1,10 @@
+오늘은 목요일, 내일은 금요일, 모레는 시험날
+오늘 ajax 복습 열심히 하세요
+1234555
+<h1 style=color:pink>이건 h1태그로 감싼 텍스트</h1>
+<p>테스트테스트</p>
+<style>
+	p{
+		background-color : green;
+	}
+</style>

@@ -81,6 +81,8 @@ public class BoardService {
 		// 게시글 상세페이지에서 새로고침하면 조회수가 계속 증가한다 
 		// 해결방법 : 회원이 이 글을 읽었는지 아닌지 쿠키에 저장해서 분기처리 한다 
 		
+		close(conn);
+		
 		return b;
 	}
 
@@ -103,7 +105,42 @@ public class BoardService {
 			rollback(conn);
 		}
 		
+		close(conn);
+		
 		return result;
+	}
+
+
+	// 댓글 달기 기능 
+	public int insertBoardComment(BoardComment bc) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.insertBoardComment(conn, bc);
+		
+		if(result > 0) {
+			
+			commit(conn);
+			
+		} else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+
+	public List<BoardComment> selectBoardComment(int boardRef) {
+		
+		Connection conn = getConnection();
+		
+		List<BoardComment> comments = dao.selectBoardComment(conn, boardRef);
+		
+		return comments;
 	}
 	
 

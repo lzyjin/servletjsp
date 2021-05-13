@@ -19,7 +19,7 @@ import javax.servlet.http.*;
 //@WebFilter("/PasswordEncrypt.do")
 @WebFilter(servletNames = {
 		
-		"loginservlet", "memberupdateservlet", "memberenrollendservlet", "updatePasswordEnd"
+		"loginservlet", "memberupdateservlet", "memberenrollendservlet", "updatePasswordEnd", "ajaxMmeber"
 		
 })
 public class PasswordEncryptFilter implements Filter {

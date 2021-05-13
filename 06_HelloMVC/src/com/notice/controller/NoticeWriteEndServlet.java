@@ -112,7 +112,7 @@ public class NoticeWriteEndServlet extends HttpServlet {
 			
 			MultipartRequest mr = new MultipartRequest(request, path, maxSize, encode, new DefaultFileRenamePolicy());
 		
-		
+			// 서버 설정에 가서 Server Options에서 Save modules without publishing 체크하기
 			
 		// 글쓰기에서 파일첨부했더니 web/upload/notice폴더 안에 내가 첨부한 파일이 저장되었다 !! 
 			

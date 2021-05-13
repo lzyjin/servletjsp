@@ -12,7 +12,7 @@ div,section,header,aside,footer{
 	
 }
 
-div#container{
+div#container{ 
 	
 	background-color : #F0F0F0;
 	width : 940px;
@@ -22,7 +22,7 @@ div#container{
 
 header{
 	
-	background-color : #00bcd4;
+	background-color : #FFAAAA;
 	height : 130px;
 	position : relative;
 	padding : 10px 0 0 0;
@@ -45,7 +45,7 @@ section#content{
 
 footer{
 	
-	background-color : #00BCD4;
+	background-color : #FFAAAA;
 	clear : both;
 	height : 75px;
 	text-align : center;
@@ -65,7 +65,7 @@ footer{
 	#saveId+label{font-size:12px;font-family:'고딕'}
 	
 	/* 메뉴관련스타일 */
-	header nav {background:#5283de; width:100%; margin-top:40px;}
+	header nav {background:#FFFFCC; width:100%; margin-top:40px;}
 	
 	/* ul태그의 가운데정렬 */
 	ul.main-nav{
