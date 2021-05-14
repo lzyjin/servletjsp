@@ -158,6 +158,35 @@
         
         <script>
         
+        /* 0514 aJax 사용  */
+        
+        $("#numPerPage").change( (e) => {
+        	
+        	$.ajax({
+        		
+        		url : "<%=request.getContextPath()%>/admin/memberlistAjax.do",
+        		
+        		data : {
+        			
+        			"cPage" : <%=request.getParameter("cPage")%>,  // 요청한주소의 서블릿으로 데이터가 넘어감 
+        			"numPerPage" : $(e.target).val()
+        			
+        		},
+        		
+        		success : data => {
+        			
+        			console.log(data);
+        			
+        		}
+        		
+        	})
+        	
+        } );
+        
+        
+        
+        
+        
         	// numPerPage 부분 -------------- 
         
 	       /*  $("#numPerPage").change( (e) => {
@@ -182,7 +211,7 @@
         	
         	
         	// 선생님 풀이 
-        	
+        /*
         	 $("#numPerPage").change( (e) => {
         		 
         		 const numPerPageFrm = $("#numPerPageFrm");
@@ -194,8 +223,8 @@
         			 
         			 console.log(v.length);
         		 } ); */
-        		 
-        		 if(<%=searchKeyword.equals("")%>) {
+        	 
+        	<%-- 	 if(<%=searchKeyword.equals("")%>) {
         			 
 	        			 // 검색 안함 
 	        			//  alert("검색안함");
@@ -258,7 +287,7 @@
         		 numPerPageFrm.submit();
         		 
         	 });
-        	
+        	 --%>
         	
 	    	
         	

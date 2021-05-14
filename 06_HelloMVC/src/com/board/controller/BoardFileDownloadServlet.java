@@ -44,7 +44,7 @@ public class BoardFileDownloadServlet extends HttpServlet {
 			
 		} else {
 			
-			reFile = new String(oriname.getBytes("utf-8"), "ISO-8859-1");
+			reFile = new String(oriname.getBytes("utf-8"), "ISO_8859_1");
 		}
 		
 		
