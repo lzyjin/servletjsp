@@ -37,7 +37,7 @@ public class BoardViewServlet extends HttpServlet {
 		
 		// boardRead : 쿠키에 저장할 값
 		// 읽은 게시글의 번호를 저장
-		
+		// 123
 		
 		Cookie[] cookies = request.getCookies();
 		
@@ -53,8 +53,9 @@ public class BoardViewServlet extends HttpServlet {
 				String value = c.getValue(); // 쿠키의 value값
 				
 				if(name.equals("boardRead")) {
+					// |1|
 					
-					boardRead = value;
+					boardRead = value; 
 					
 					if(value.contains("|" + boardNo + "|")) { // 이렇게 쓰는 이유 : 사용자가 본 글의 번호를 알기 쉽게 
 						// 이렇게 안하면 123456121678 이런식으로 저장돼서 숫자 구분이 안되기때문에
@@ -70,11 +71,13 @@ public class BoardViewServlet extends HttpServlet {
 			
 		} 
 		
-		// 게시글을 안읽었을 때 돌아갈 실행문 
+		// 게시글을 안읽었을 때 돌아갈 실행문 ( readFlag가 false인 상태니까 )
 		// 그래서 조건을 !붙여서 true로 만들어준것 뿐 
 		if( !readFlag ) {
 			
 			// 안읽었다면 기존 boardRead에 추가
+											 // boardRead에는 이전에 읽은 |1| |2| 리뷰번호가 이런식으로 저장되어있음
+											 // 쿠키는 새로 덮어쓰기 때문에 이렇게 누적해줘야한다
 			Cookie c = new Cookie("boardRead", boardRead + "|" + boardNo + "|"); // 누적연산 
 			
 			// 쿠키 유지기간 설정 

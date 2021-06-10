@@ -93,7 +93,67 @@
 		});
 	</script>
 	
+	
+	<!-- 0519 보강 -->
 	<h1>Ajax를 이용한 파일 업로드 처리하기</h1>
+	
+	<input type="file" id="upfile" multiple> <!-- multiple이면 files에 배열형식으로 여러개 들어간다 --> 
+	
+	<button id="sendFile">파일 전송</button>
+	
+	<script>
+		$("#sendFile").click( e => {
+			
+			//ajax는 데이터를 객체로 전송한다
+			
+			// FormData객체를 이용해서 파일을 전송할 수 있다.
+			
+			let form = new FormData();
+			
+					// $(e.target).prev()[0] : input태그
+			
+			/* form.append("upfile", $(e.target).prev()[0].files[0]); */
+			// form안에 input태그가 하나 추가되었다고 생각하면 된다.
+			
+			
+			
+					/* console.log($(e.target).prev()[0].files[0]); */
+			
+			$.each($(e.target).prev()[0].files, (i,v) => {
+				
+				console.log(i,v);
+				
+				form.append("upfile"+i, v);
+			})
+			
+			form.append("name", "유병승");
+
+			// title, content
+			//
+			
+			console.dir($(e.target).prev()[0]);
+			
+			$.ajax({
+				url : "<%=request.getContextPath()%>/fileUpload",
+				data : form,
+				type : "post",
+				processData : false, 
+				contentType : false, 
+				success : data => {
+					
+					alert("업로드 성공");
+					
+					// 파일 갱신 ( 페이지에 보이는 파일선택창옆에 뜨는 파일명 리셋 )
+					$("#upfile").val("");
+				}
+			})
+			
+		} );
+	</script>
+	
+	
+	
+	
 	
 	
 	
