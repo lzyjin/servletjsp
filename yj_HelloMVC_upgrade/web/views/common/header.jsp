@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member, com.common.listener.LoginCheckListener, com.member.controller.LoginServlet"%>
-    
+<%@ page import="com.member.model.vo.Member, 
+				 com.common.listener.LoginCheckListener, 
+				 com.member.controller.LoginServlet"
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
 <%
 
 	// 서버에서 전송된 request의  loginMember를 가져오기
 	/* Member loginMember = (Member)request.getAttribute("loginMember"); */
 	
-	Member loginMember = (Member)session.getAttribute("loginMember");
+	 Member loginMember = (Member)session.getAttribute("loginMember"); 
 	
 	Cookie cookies[] = request.getCookies();
 	String saveId = null;
@@ -34,9 +39,9 @@
 <head>
 <meta charset="UTF-8">
 <title>HelloMVC</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css">
+<link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/style.css">
 
-<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
+<script src="${ pageContext.request.contextPath }/js/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -53,7 +58,7 @@
 			<% if(loginMember == null) { %>
 			
 				
-				<form id="loginFrm" action="<%=request.getContextPath()%>/login"  method="post" onsubmit="return fn_login_validate();"> <!-- 함수 결과가 true면 submit -->
+				<form id="loginFrm" action="${ pageContext.request.contextPath }/login"  method="post" onsubmit="return fn_login_validate();"> <!-- 함수 결과가 true면 submit -->
 					
 						<table>
 							
@@ -95,7 +100,7 @@
 									
 									<label for="saveId">아이디저장</label>
 									
-									<input type="button" value="회원가입" onclick="location.assign('<%=request.getContextPath()%>/memberenroll.do')">
+									<input type="button" value="회원가입" onclick="location.assign('${ pageContext.request.contextPath }/memberenroll.do')">
 								
 								</td>
 								
@@ -108,14 +113,14 @@
 				</form>
 				
 				
-				<% } else {  System.out.println("header" + loginMember.getUserName()); %>
+				<% } else {  System.out.println("header" + loginMember.getUsername()); %>
 			
 			
 							<table id="logged-in">
 							
 								<tr>
 								
-									<td colspan="2"><%= loginMember.getUserName() %>님, 환영합니다</td>
+									<td colspan="2"><%= loginMember.getUsername() %>님, 환영합니다</td>
 								
 								</tr>
 								
@@ -129,11 +134,11 @@
 								
 									<td>
 											<%-- <input type="button" value="내 정보 보기" onclick="location.assign('<%=request.getContextPath()%>/views/member/mypage.jsp')"> --%>
-												<input type="button" value="내 정보 보기" onclick="location.assign('<%=request.getContextPath()%>/memberView.do?userId=<%=loginMember.getMemberId()%>')">
+												<input type="button" value="내 정보 보기" onclick="location.assign('${ pageContext.request.contextPath }/memberView.do?userId=<%=loginMember.getUserid()%>')">
 												<!-- 쿼리스트링 작성시 ""사용하지 않음  -->
 									</td>
 									<td>
-											<input type="button" value="로그아웃" onclick="location.assign('<%=request.getContextPath()%>/logout')">
+											<input type="button" value="로그아웃" onclick="location.assign('${ pageContext.request.contextPath }/logout')">
 
 									</td>
 								
@@ -153,13 +158,13 @@
 				<ul class="main-nav">
 				
 					<li class="home"><a href="">Home</a></li>
-					<li class="notice"><a href="<%=request.getContextPath()%>/notice/noticeList.do">공지사항</a></li>
-					<li class="board"><a href="<%=request.getContextPath()%>/board/boardList.do">게시판</a></li>
+					<li class="notice"><a href="${ pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
+					<li class="board"><a href="${ pageContext.request.contextPath }/board/boardList.do">게시판</a></li>
 					
 					<!-- 0506 --> 
 					
-					<% if(loginMember != null && loginMember.getMemberId().equals("admin")) { %>
-						<li class="admin-member"><a href="<%=request.getContextPath()%>/admin/memberlist.do">회원관리</a></li>
+					<% if(loginMember != null && loginMember.getUserid().equals("admin")) { %>
+						<li class="admin-member"><a href="${ pageContext.request.contextPath }/admin/memberlist.do">회원관리</a></li>
 						<%-- <li class="admin-member"><a href="<%=request.getContextPath()%>/admin/memberlist.do?cPage=1&numPerPage=5">회원관리</a></li> 이렇게 할 수도 있는데 선생님은 다른 방법으로 했다 --%> 
 					<% } %>
 				</ul>
@@ -169,7 +174,7 @@
 			
 		</header>
 		
-		
+		</div>
 		
 		<script>
 			
